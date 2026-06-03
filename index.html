@@ -436,6 +436,93 @@
         .lesson-8 .lesson-icon { background: rgba(139,92,246,0.15); color: #8b5cf6; }
         .lesson-9 .lesson-icon { background: rgba(20,184,166,0.15); color: #14b8a6; }
 
+        /* ============ Lesson Audio ============ */
+        .lesson-audio-panel {
+            margin-bottom: 28px;
+            border-right: 4px solid var(--accent-1);
+        }
+        .lesson-audio-panel.has-audio { border-right-color: var(--accent-4); }
+        .lesson-audio-panel.no-audio { border-right-color: var(--text-muted); opacity: 0.95; }
+        .audio-panel-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+        .audio-panel-head h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .audio-panel-head h3 i { color: var(--accent-4); }
+        .audio-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .audio-badge {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(124,58,237,0.15);
+            color: var(--accent-8);
+            border: 1px solid rgba(124,58,237,0.25);
+        }
+        .audio-badge.pages { background: rgba(59,130,246,0.12); color: var(--accent-2); border-color: rgba(59,130,246,0.25); }
+        .audio-badge.status-ok { background: rgba(16,185,129,0.12); color: var(--accent-4); border-color: rgba(16,185,129,0.3); }
+        .audio-badge.status-pending { background: rgba(245,158,11,0.12); color: var(--accent-5); border-color: rgba(245,158,11,0.3); }
+        .audio-topics {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            line-height: 1.7;
+        }
+        .audio-topics strong { color: var(--text-primary); }
+        .lesson-audio-panel audio {
+            width: 100%;
+            margin-top: 4px;
+            border-radius: var(--radius-sm);
+        }
+        .audio-filename {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+        .audio-transcript-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            text-decoration: none;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        .audio-transcript-link:hover { text-decoration: underline; }
+        .audio-guide-section { padding: 0 40px 20px; max-width: 1200px; margin: 0 auto; }
+        .audio-guide-section .glass-card { margin-bottom: 0; }
+        .audio-guide-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        .audio-guide-table th, .audio-guide-table td {
+            padding: 12px 14px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+        .audio-guide-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        .audio-guide-table tr:hover td { background: var(--bg-card-hover); }
+        .audio-guide-table a { color: var(--accent-2); text-decoration: none; font-weight: 600; }
+        .audio-guide-table a:hover { text-decoration: underline; }
+        .audio-guide-table .has-audio-cell { color: var(--accent-4); }
+        .audio-guide-table .no-audio-cell { color: var(--text-muted); }
+
         /* ============ Glass Cards ============ */
         .glass-card {
             background: var(--glass-bg);
@@ -1072,9 +1159,33 @@
             <div class="stat-item"><div class="stat-number" data-target="9">0</div><div class="stat-label">دروس شاملة</div></div>
             <div class="stat-item"><div class="stat-number" data-target="32">0</div><div class="stat-label">سؤال تفاعلي</div></div>
             <div class="stat-item"><div class="stat-number" data-target="18">0</div><div class="stat-label">صفحة محتوى</div></div>
-            <div class="stat-item"><div class="stat-number" data-target="12">0</div><div class="stat-label">مثال تطبيقي</div></div>
+            <div class="stat-item"><div class="stat-number" data-target="4">0</div><div class="stat-label">تسجيل صوتي</div></div>
         </div>
     </section>
+
+    <!-- دليل الدروس والصوت -->
+    <div class="audio-guide-section" id="audioGuide">
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-headphones"></i> دليل الدروس — أي صوت لأي جزء؟</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;font-size:0.95rem;">
+                كل درس في الصفحة يطابق قسماً في المنهج. التسجيلات الصوتية المتوفرة حالياً (4) مربوطة بالدروس المناسبة؛ باقي الدروس لها نص في <code>transcripts/</code> فقط حتى يُرفع صوتها.
+            </p>
+            <div class="table-wrapper">
+                <table class="audio-guide-table" id="audioGuideTable">
+                    <thead>
+                        <tr>
+                            <th>الدرس</th>
+                            <th>الجزء في المنهج</th>
+                            <th>محتوى الدرس (ملخص)</th>
+                            <th>التسجيل الصوتي</th>
+                            <th>انتقل</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <!-- ===================== LESSON 1 ===================== -->
     <section class="lesson-section lesson-1" id="lesson1">
@@ -1773,6 +1884,137 @@
 <button class="back-to-top" id="backToTop" aria-label="العودة للأعلى"><i class="fas fa-arrow-up"></i></button>
 
 <script>
+// ============ Lesson ↔ Audio ↔ Transcript mapping ============
+const LESSON_MEDIA = [
+    {
+        id: 1, sectionId: 'lesson1', pages: '1–2',
+        transcript: 'transcripts/01-مقدمة-الإدارة-الاستراتيجية.md',
+        topics: 'تعريف الاستراتيجية (Chandler، Drucker، Mintzberg)، الإدارة الاستراتيجية، مراحل التطور الأربع، الفوائد المالية وغير المالية',
+        audioFile: 'sound/lesson-01.m4a',
+        audioTitle: 'إزاي الإدارة الاستراتيجية بتنقذ الشركات من الانهيار'
+    },
+    {
+        id: 2, sectionId: 'lesson2', pages: '3–4',
+        transcript: 'transcripts/02-نماذج-ومداخل-الإدارة.md',
+        topics: 'نموذج عملية الإدارة الاستراتيجية، RBV وVRIO، سلسلة القيمة، القيمة الاستراتيجية، التوافق الاستراتيجي',
+        audioFile: null,
+        audioTitle: null
+    },
+    {
+        id: 3, sectionId: 'lesson3', pages: '4–5',
+        transcript: 'transcripts/03-التفكير-الاستراتيجي.md',
+        topics: 'تعريف التفكير الاستراتيجي (Daft)، خصائص التفكير، نموذج جين ليدكا 1998',
+        audioFile: 'sound/lesson-03.m4a',
+        audioTitle: 'إزاي تدير المستقبل بعقلية المهندس الاستراتيجي'
+    },
+    {
+        id: 4, sectionId: 'lesson4', pages: '5–8',
+        transcript: 'transcripts/04-التوجه-الاستراتيجي.md',
+        topics: 'الرؤية، الرسالة، الأهداف (SMART)، القيم، تمرين شركة التميز للتكنولوجيا',
+        audioFile: 'sound/lesson-04.m4a',
+        audioTitle: 'التوجه الاستراتيجي — سر بقاء ونجاح الشركات'
+    },
+    {
+        id: 5, sectionId: 'lesson5', pages: '9–10',
+        transcript: 'transcripts/05-تحليل-البيئة-الخارجية.md',
+        topics: 'تحليل PESTEL، مثال Tesla، نموذج القوى الخمس لبورتر',
+        audioFile: null,
+        audioTitle: null
+    },
+    {
+        id: 6, sectionId: 'lesson6', pages: '10–13',
+        transcript: 'transcripts/06-البيئة-الداخلية-والتنافسية.md',
+        topics: 'مصفوفة IFE، CPM (Apple/Samsung)، SPACE، EFE (شركة Fresh)',
+        audioFile: null,
+        audioTitle: null
+    },
+    {
+        id: 7, sectionId: 'lesson7', pages: '14–15',
+        transcript: 'transcripts/07-التحليل-الاستراتيجي-الشامل.md',
+        topics: 'SWOT، SBU، BCG، ماكدونالدز، QSPM، مفهوم التحليل الاستراتيجي',
+        audioFile: null,
+        audioTitle: null
+    },
+    {
+        id: 8, sectionId: 'lesson8', pages: '16–17',
+        transcript: 'transcripts/08-البدائل-والتنفيذ-والرقابة.md',
+        topics: 'البدائل والتنويع، الانكماش والإفلاس، التنفيذ، الرقابة، بطاقة الأداء المتوازن BSC',
+        audioFile: 'sound/lesson-08.m4a',
+        audioTitle: 'ليه الشركات بتفلس والفلوس موجودة؟'
+    },
+    {
+        id: 9, sectionId: 'lesson9', pages: '18',
+        transcript: 'transcripts/09-أسئلة-استرشادية.md',
+        topics: 'أسئلة صح وخطأ (1–21) واختيار من متعدد (22–32)',
+        audioFile: null,
+        audioTitle: null
+    }
+];
+
+function buildLessonAudioPanels() {
+    const guideBody = document.querySelector('#audioGuideTable tbody');
+    let currentAudio = null;
+
+    LESSON_MEDIA.forEach(lesson => {
+        const section = document.getElementById(lesson.sectionId);
+        if (!section) return;
+
+        const header = section.querySelector('.lesson-header');
+        const hasAudio = Boolean(lesson.audioFile);
+        const panel = document.createElement('div');
+        panel.className = `glass-card lesson-audio-panel ${hasAudio ? 'has-audio' : 'no-audio'}`;
+
+        const audioBlock = hasAudio
+            ? `<p class="audio-topics"><strong>عنوان التسجيل:</strong> ${lesson.audioTitle}</p>
+               <audio controls preload="metadata" data-lesson="${lesson.id}">
+                   <source src="${encodeURI(lesson.audioFile)}" type="audio/mp4">
+               </audio>
+               <p class="audio-filename"><i class="fas fa-file-audio"></i> ${lesson.audioFile.split('/').pop()}</p>`
+            : `<p class="audio-topics" style="margin-bottom:0">
+                   <i class="fas fa-clock" style="color:var(--accent-5)"></i>
+                   <strong>لا يوجد تسجيل صوتي لهذا الدرس بعد.</strong> يمكنك قراءة النص من ملف الـ transcript أو مراجعة المحتوى أدناه.
+               </p>`;
+
+        panel.innerHTML = `
+            <div class="audio-panel-head">
+                <h3><i class="fas fa-volume-high"></i> الشرح الصوتي — الدرس ${lesson.id}</h3>
+                <div class="audio-meta">
+                    <span class="audio-badge pages">صفحات المنهج: ${lesson.pages}</span>
+                    <span class="audio-badge ${hasAudio ? 'status-ok' : 'status-pending'}">${hasAudio ? 'تسجيل متوفر' : 'قريباً'}</span>
+                </div>
+            </div>
+            <p class="audio-topics"><strong>يتغطى هذا الدرس:</strong> ${lesson.topics}</p>
+            ${audioBlock}
+            <a class="audio-transcript-link" href="${lesson.transcript}" target="_blank" rel="noopener">
+                <i class="fas fa-file-lines"></i> فتح نص الدرس (Markdown)
+            </a>
+        `;
+        header.insertAdjacentElement('afterend', panel);
+
+        if (hasAudio) {
+            const audioEl = panel.querySelector('audio');
+            audioEl.addEventListener('play', () => {
+                if (currentAudio && currentAudio !== audioEl) currentAudio.pause();
+                currentAudio = audioEl;
+            });
+        }
+
+        if (guideBody) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>الدرس ${lesson.id}</strong></td>
+                <td>صفحات ${lesson.pages}</td>
+                <td>${lesson.topics}</td>
+                <td class="${hasAudio ? 'has-audio-cell' : 'no-audio-cell'}">${hasAudio ? lesson.audioTitle : '— لا يوجد بعد —'}</td>
+                <td><a href="#${lesson.sectionId}">انتقل للدرس</a></td>
+            `;
+            guideBody.appendChild(tr);
+        }
+    });
+}
+
+buildLessonAudioPanels();
+
 // ============ Quiz Data ============
 const tfQuestions = [
     {q: "ترتبط الاستراتيجية بفن القيادة أو فن الحرب.", a: true},
