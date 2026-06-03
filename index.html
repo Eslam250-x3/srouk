@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="الإدارة الاستراتيجية - المراجعة النهائية - المستوى الثالث 2026">
+    <title>الإدارة الاستراتيجية | المراجعة النهائية 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ============ CSS Variables ============ */
+        :root {
+            --bg-primary: #0a0a1a;
+            --bg-secondary: #111127;
+            --bg-card: rgba(255,255,255,0.04);
+            --bg-card-hover: rgba(255,255,255,0.08);
+            --text-primary: #e8e8f0;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border-color: rgba(255,255,255,0.08);
+            --accent-1: #7c3aed;
+            --accent-2: #3b82f6;
+            --accent-3: #06b6d4;
+            --accent-4: #10b981;
+            --accent-5: #f59e0b;
+            --accent-6: #ef4444;
+            --accent-7: #ec4899;
+            --accent-8: #8b5cf6;
+            --accent-9: #14b8a6;
+            --gradient-main: linear-gradient(135deg, #7c3aed, #3b82f6, #06b6d4);
+            --gradient-card: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(59,130,246,0.1));
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.08);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            --sidebar-width: 300px;
+            --font-main: 'Tajawal', sans-serif;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f0f2f5;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255,255,255,0.8);
+            --bg-card-hover: rgba(255,255,255,0.95);
+            --text-primary: #1a1a2e;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --border-color: rgba(0,0,0,0.08);
+            --glass-bg: rgba(255,255,255,0.7);
+            --glass-border: rgba(0,0,0,0.06);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            --gradient-card: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(59,130,246,0.05));
+        }
+
+        /* ============ Reset & Base ============ */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-main);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        /* ============ Scrollbar ============ */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-1), var(--accent-2));
+            border-radius: 10px;
+        }
+
+        /* ============ Progress Bar ============ */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-main);
+            z-index: 10000;
+            transition: width 0.15s ease;
+            border-radius: 0 0 0 4px;
+        }
+
+        /* ============ Background Particles ============ */
+        .bg-particles {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-particles span {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--accent-1);
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float-particle linear infinite;
+        }
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* ============ Sidebar ============ */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border-color);
+            z-index: 1000;
+            overflow-y: auto;
+            transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+            padding: 24px 0;
+        }
+        .sidebar-header {
+            padding: 20px 24px 24px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .sidebar-header h2 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .sidebar-nav { padding: 16px 12px; }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: var(--gradient-card);
+            color: var(--text-primary);
+        }
+        .sidebar-nav a.active {
+            border-right: 3px solid var(--accent-1);
+        }
+        .sidebar-nav a i {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .nav-icon-1 { background: rgba(124,58,237,0.15); color: #7c3aed; }
+        .nav-icon-2 { background: rgba(59,130,246,0.15); color: #3b82f6; }
+        .nav-icon-3 { background: rgba(6,182,212,0.15); color: #06b6d4; }
+        .nav-icon-4 { background: rgba(16,185,129,0.15); color: #10b981; }
+        .nav-icon-5 { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .nav-icon-6 { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .nav-icon-7 { background: rgba(236,72,153,0.15); color: #ec4899; }
+        .nav-icon-8 { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+        .nav-icon-9 { background: rgba(20,184,166,0.15); color: #14b8a6; }
+
+        /* ============ Mobile Menu Toggle ============ */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 1100;
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        /* ============ Main Content ============ */
+        .main-content {
+            margin-right: var(--sidebar-width);
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============ Top Bar ============ */
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10,10,26,0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        [data-theme="light"] .top-bar {
+            background: rgba(240,242,245,0.85);
+        }
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .search-box input:focus {
+            border-color: var(--accent-2);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+        }
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+        .search-results {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            margin-top: 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 200;
+        }
+        .search-results.show { display: block; }
+        .search-result-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+        .search-result-item:hover { background: var(--bg-card-hover); }
+        .search-result-item mark {
+            background: rgba(245,158,11,0.3);
+            color: var(--text-primary);
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+        .top-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .theme-toggle, .print-btn {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+        .theme-toggle:hover, .print-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-2);
+        }
+
+        /* ============ Hero Section ============ */
+        .hero {
+            padding: 80px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(124,58,237,0.08) 0%, transparent 60%);
+            animation: hero-glow 8s ease-in-out infinite alternate;
+        }
+        @keyframes hero-glow {
+            0% { transform: translate(10%, 10%); }
+            100% { transform: translate(-10%, -10%); }
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: var(--gradient-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-3);
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ============ Lesson Sections ============ */
+        .lesson-section {
+            padding: 40px 48px 60px;
+            border-top: 1px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .lesson-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+        .lesson-icon {
+            width: 56px; height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .lesson-header h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+        .lesson-header .lesson-num {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* Lesson Colors */
+        .lesson-1 .lesson-icon { background: rgba(124,58,237,0.15); color: #7c3aed; }
+        .lesson-2 .lesson-icon { background: rgba(59,130,246,0.15); color: #3b82f6; }
+        .lesson-3 .lesson-icon { background: rgba(6,182,212,0.15); color: #06b6d4; }
+        .lesson-4 .lesson-icon { background: rgba(16,185,129,0.15); color: #10b981; }
+        .lesson-5 .lesson-icon { background: rgba(245,158,11,0.15); color: #f59e0b; }
+        .lesson-6 .lesson-icon { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .lesson-7 .lesson-icon { background: rgba(236,72,153,0.15); color: #ec4899; }
+        .lesson-8 .lesson-icon { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+        .lesson-9 .lesson-icon { background: rgba(20,184,166,0.15); color: #14b8a6; }
+
+        /* ============ Glass Cards ============ */
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 28px;
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: var(--glass-shadow);
+            transition: var(--transition);
+        }
+        .glass-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(124,58,237,0.2);
+            transform: translateY(-2px);
+        }
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-title i {
+            color: var(--accent-2);
+            font-size: 0.9rem;
+        }
+
+        /* ============ Definition Blocks ============ */
+        .definition-block {
+            background: var(--gradient-card);
+            border-right: 4px solid var(--accent-1);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+        }
+        .definition-block .def-author {
+            font-weight: 700;
+            color: var(--accent-2);
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+        .definition-block p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ============ Feature Cards ============ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            transition: var(--transition);
+        }
+        .feature-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+        }
+        .feature-card h4 {
+            color: var(--accent-3);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ============ Tables ============ */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        thead th {
+            background: var(--gradient-card);
+            padding: 14px 16px;
+            font-weight: 700;
+            text-align: right;
+            border-bottom: 2px solid var(--accent-1);
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+        tbody tr:hover {
+            background: var(--bg-card-hover);
+        }
+        tbody tr:nth-child(even) {
+            background: var(--bg-card);
+        }
+
+        /* ============ Lists ============ */
+        .styled-list {
+            list-style: none;
+            padding: 0;
+        }
+        .styled-list li {
+            padding: 10px 0;
+            padding-right: 28px;
+            position: relative;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+        .styled-list li:last-child { border-bottom: none; }
+        .styled-list li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            color: var(--accent-4);
+            font-size: 0.8rem;
+            top: 13px;
+        }
+
+        /* ============ Accordion ============ */
+        .accordion { margin: 16px 0; }
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+        .accordion-header {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border: none;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: var(--transition);
+            text-align: right;
+        }
+        .accordion-header:hover { background: var(--bg-card-hover); }
+        .accordion-header i {
+            transition: transform 0.3s ease;
+            color: var(--accent-2);
+        }
+        .accordion-item.open .accordion-header i {
+            transform: rotate(180deg);
+        }
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            padding: 0 20px;
+        }
+        .accordion-item.open .accordion-body {
+            max-height: 3000px;
+            padding: 16px 20px 20px;
+        }
+
+        /* ============ Quiz Section ============ */
+        .quiz-container { margin: 20px 0; }
+        .quiz-question {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: var(--transition);
+        }
+        .quiz-question.correct {
+            border-color: var(--accent-4);
+            background: rgba(16,185,129,0.05);
+        }
+        .quiz-question.wrong {
+            border-color: var(--accent-6);
+            background: rgba(239,68,68,0.05);
+        }
+        .quiz-question h4 {
+            margin-bottom: 16px;
+            font-size: 1rem;
+            display: flex;
+            gap: 10px;
+        }
+        .quiz-question h4 .q-num {
+            background: var(--gradient-card);
+            border: 1px solid var(--glass-border);
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--accent-2);
+            flex-shrink: 0;
+        }
+        .quiz-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        .quiz-option:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-2);
+        }
+        .quiz-option input { display: none; }
+        .quiz-option .radio-dot {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        .quiz-option input:checked + .radio-dot {
+            border-color: var(--accent-2);
+            background: var(--accent-2);
+        }
+        .quiz-option input:checked + .radio-dot::after {
+            content: '';
+            width: 8px; height: 8px;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .quiz-feedback {
+            margin-top: 12px;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: none;
+        }
+        .quiz-feedback.show { display: flex; align-items: center; gap: 8px; }
+        .quiz-feedback.correct-fb {
+            background: rgba(16,185,129,0.1);
+            color: var(--accent-4);
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+        .quiz-feedback.wrong-fb {
+            background: rgba(239,68,68,0.1);
+            color: var(--accent-6);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+        .mcq-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .mcq-option {
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        .mcq-option:hover { background: var(--bg-card-hover); border-color: var(--accent-2); }
+        .mcq-option.selected { border-color: var(--accent-2); background: rgba(59,130,246,0.1); }
+        .mcq-option.correct-answer { border-color: var(--accent-4); background: rgba(16,185,129,0.1); }
+        .mcq-option.wrong-answer { border-color: var(--accent-6); background: rgba(239,68,68,0.1); }
+
+        .check-btn, .score-btn {
+            padding: 10px 28px;
+            background: var(--gradient-main);
+            border: none;
+            border-radius: var(--radius-sm);
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: var(--transition);
+        }
+        .check-btn:hover, .score-btn:hover { transform: scale(1.02); opacity: 0.9; }
+
+        .score-display {
+            text-align: center;
+            padding: 32px;
+            margin: 24px 0;
+            background: var(--gradient-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+        }
+        .score-display .score-num {
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============ Back to Top ============ */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            left: 32px;
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            background: var(--gradient-main);
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-to-top.show { opacity: 1; transform: translateY(0); }
+
+        /* ============ Footer ============ */
+        footer {
+            text-align: center;
+            padding: 40px 48px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        footer .footer-brand {
+            font-size: 1.1rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        /* ============ Responsive ============ */
+        @media (max-width: 900px) {
+            .sidebar { transform: translateX(100%); }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay.show { display: block; }
+            .menu-toggle { display: flex; }
+            .main-content { margin-right: 0; }
+            .hero { padding: 60px 20px; }
+            .lesson-section { padding: 30px 20px 50px; }
+            .top-bar { padding: 12px 16px; }
+            .hero-stats { gap: 24px; }
+            .mcq-options { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ============ Print ============ */
+        @media print {
+            .sidebar, .menu-toggle, .top-bar, .back-to-top, .bg-particles,
+            #progress-bar, .sidebar-overlay, .theme-toggle, .print-btn { display: none !important; }
+            .main-content { margin-right: 0; }
+            .lesson-section { opacity: 1; transform: none; page-break-inside: avoid; }
+            .glass-card { box-shadow: none; border: 1px solid #ddd; }
+            body { background: #fff; color: #000; }
+        }
+
+        /* ============ Animations ============ */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeInUp 0.5s ease forwards; }
+
+        /* Highlight Styles */
+        .highlight {
+            background: rgba(245,158,11,0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        strong { color: var(--text-primary); }
+
+        /* Example box */
+        .example-box {
+            background: rgba(16,185,129,0.05);
+            border: 1px solid rgba(16,185,129,0.15);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin: 16px 0;
+        }
+        .example-box .example-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-4);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* Info callout */
+        .callout {
+            padding: 16px 20px;
+            border-radius: var(--radius-sm);
+            margin: 16px 0;
+            font-size: 0.9rem;
+        }
+        .callout-info {
+            background: rgba(59,130,246,0.08);
+            border-right: 4px solid var(--accent-2);
+            color: var(--text-secondary);
+        }
+        .callout-warning {
+            background: rgba(245,158,11,0.08);
+            border-right: 4px solid var(--accent-5);
+        }
+
+        /* Steps */
+        .steps-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .steps-list li {
+            counter-increment: step;
+            padding: 12px 0 12px 0;
+            padding-right: 48px;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        .steps-list li::before {
+            content: counter(step);
+            position: absolute;
+            right: 0;
+            top: 12px;
+            width: 32px; height: 32px;
+            background: var(--gradient-main);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* BCG Grid */
+        .bcg-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .bcg-card {
+            padding: 24px;
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+            text-align: center;
+        }
+        .bcg-card h4 { margin-bottom: 8px; }
+        .bcg-card .bcg-icon { font-size: 2rem; margin-bottom: 12px; }
+        .bcg-stars { background: rgba(245,158,11,0.08); }
+        .bcg-stars .bcg-icon { color: var(--accent-5); }
+        .bcg-cash { background: rgba(16,185,129,0.08); }
+        .bcg-cash .bcg-icon { color: var(--accent-4); }
+        .bcg-question { background: rgba(59,130,246,0.08); }
+        .bcg-question .bcg-icon { color: var(--accent-2); }
+        .bcg-dogs { background: rgba(239,68,68,0.08); }
+        .bcg-dogs .bcg-icon { color: var(--accent-6); }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .comparison-card {
+            padding: 20px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--glass-border);
+        }
+        .comparison-card h4 {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .comparison-card ul { list-style: none; padding: 0; }
+        .comparison-card ul li {
+            padding: 6px 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Process Flow */
+        .process-flow {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+            align-items: center;
+            justify-content: center;
+        }
+        .process-step {
+            background: var(--gradient-card);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+            text-align: center;
+            min-width: 160px;
+            flex: 1;
+        }
+        .process-step .step-num {
+            width: 32px; height: 32px;
+            background: var(--gradient-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin: 0 auto 10px;
+        }
+        .process-step h5 { font-size: 0.9rem; margin-bottom: 6px; }
+        .process-step p { font-size: 0.8rem; color: var(--text-muted); }
+        .process-arrow {
+            color: var(--accent-2);
+            font-size: 1.2rem;
+        }
+
+        /* BSC Grid */
+        .bsc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .bsc-card {
+            padding: 20px;
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+        }
+        .bsc-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .bcg-grid, .comparison-grid, .bsc-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Background Particles -->
+<div class="bg-particles" id="particles"></div>
+
+<!-- Mobile Menu Toggle -->
+<button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+    <i class="fas fa-bars"></i>
+</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h2><i class="fas fa-chess-rook"></i> الإدارة الاستراتيجية</h2>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">المراجعة النهائية 2026</p>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#lesson1"><i class="nav-icon-1 fas fa-book-open"></i> مقدمة في الإدارة الاستراتيجية</a>
+        <a href="#lesson2"><i class="nav-icon-2 fas fa-sitemap"></i> نماذج ومداخل الإدارة</a>
+        <a href="#lesson3"><i class="nav-icon-3 fas fa-brain"></i> التفكير الاستراتيجي</a>
+        <a href="#lesson4"><i class="nav-icon-4 fas fa-compass"></i> التوجه الاستراتيجي</a>
+        <a href="#lesson5"><i class="nav-icon-5 fas fa-globe"></i> تحليل البيئة الخارجية</a>
+        <a href="#lesson6"><i class="nav-icon-6 fas fa-chart-bar"></i> البيئة الداخلية والتنافسية</a>
+        <a href="#lesson7"><i class="nav-icon-7 fas fa-puzzle-piece"></i> التحليل الاستراتيجي الشامل</a>
+        <a href="#lesson8"><i class="nav-icon-8 fas fa-rocket"></i> البدائل والتنفيذ والرقابة</a>
+        <a href="#lesson9"><i class="nav-icon-9 fas fa-clipboard-check"></i> أسئلة استرشادية</a>
+    </nav>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="ابحث في المحتوى..." autocomplete="off">
+            <div class="search-results" id="searchResults"></div>
+        </div>
+        <div class="top-bar-actions">
+            <button class="print-btn" onclick="window.print()" title="طباعة"><i class="fas fa-print"></i></button>
+            <button class="theme-toggle" id="themeToggle" title="تبديل الثيم"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge"><i class="fas fa-graduation-cap"></i> المستوى الثالث — ٢٠٢٦</div>
+        <h1>الإدارة الاستراتيجية</h1>
+        <p>المراجعة النهائية الشاملة — تغطية كاملة للمنهج مع أمثلة تطبيقية وأسئلة تفاعلية</p>
+        <div class="hero-stats">
+            <div class="stat-item"><div class="stat-number" data-target="9">0</div><div class="stat-label">دروس شاملة</div></div>
+            <div class="stat-item"><div class="stat-number" data-target="32">0</div><div class="stat-label">سؤال تفاعلي</div></div>
+            <div class="stat-item"><div class="stat-number" data-target="18">0</div><div class="stat-label">صفحة محتوى</div></div>
+            <div class="stat-item"><div class="stat-number" data-target="12">0</div><div class="stat-label">مثال تطبيقي</div></div>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 1 ===================== -->
+    <section class="lesson-section lesson-1" id="lesson1">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-book-open"></i></div>
+            <div><h2>مقدمة في الإدارة الاستراتيجية</h2><span class="lesson-num">الدرس الأول</span></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-quote-right"></i> تعريف الاستراتيجية</div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-user-tie"></i> تعريف Alfred Chandler</div>
+                <p>يعرف ألفريد شاندلر الاستراتيجية بأنها "تحديد الأهداف والغايات الأساسية طويلة المدى للمؤسسة واعتماد مسارات العمل وتخصيص الموارد اللازمة لتنفيذ تلك الأهداف".</p>
+            </div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-user-tie"></i> تعريف Higgins & Vincze, 1995</div>
+                <p>يعرف هيجينز وفينسي الاستراتيجية بأنها "عملية إنجاز رسالة المنظمة من خلال إدارة وتوجيه علاقاتها مع البيئة".</p>
+            </div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-user-tie"></i> تعريف Drucker</div>
+                <p>يعرف دروكر الاستراتيجية بأنها: عملية مستمرة لتنظيم وتنفيذ القرارات الحالية وتوفير المعلومات اللازمة وتنظيم الموارد والجهود الكفيلة لتنفيذ القرارات وتقييم النتائج بواسطة نظام معلومات متكامل وفعال.</p>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-star"></i> خصائص الإستراتيجية (Mintezberg)</div>
+            <div class="features-grid">
+                <div class="feature-card"><h4><i class="fas fa-map"></i> الاستراتيجية خطة</h4><p>نشاط مقصود للتعامل مع المواقف المتباينة وتحقيق أهداف معينة.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-chess-knight"></i> الاستراتيجية مناورة</h4><p>خطة عامة أو خاصة تسعي لخداع المنافسين ومراوغتهم وهي أقرب إلي التكتيك.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-shapes"></i> الاستراتيجية نموذج</h4><p>أسلوب في عملية تدفق الأنشطة المختلفة فهي نتاج عملية التعلم التنظيمي وتراكم الخبرات.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-location-dot"></i> الاستراتيجية وضع</h4><p>وضع قائم من خلال سوق التعامل مع الزبائن وما تكتسبه من مركز يعكس عملياتها ومنتجاتها.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-eye"></i> الاستراتيجية منظور</h4><p>تعبر عن رؤية المنظمة لأغراضها واتجاهاتها المستقبلية.</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-building"></i> تعريف الإدارة الاستراتيجية</div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-user-tie"></i> تعريف ثومبسون واسترك لاند</div>
+                <p>وضع الخطط المستقبلية للمنظمة وتحديد غاياتها علي المدى البعيد واختيار النمط الملائم من أجل تنفيذ الاستراتيجية.</p>
+            </div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-user-tie"></i> تعريف جليك Gluek</div>
+                <p>سلسلة من القرارات والأفعال التي تقود إلي تطوير استراتيجية أو استراتيجيات فعالة لتحقيق أهداف المنظمة.</p>
+            </div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-file-lines"></i> التعريف الإجرائي</div>
+                <p>سلسلة متصلة من القرارات والتصرفات تشمل جميع المجالات الوظيفية في المؤسسة والتي تؤدي إلي تنمية وتكوين استراتيجيات فعالة بناءً علي التحليل البيئي الداخلي والخارجي لاستغلال الفرص ومواجهة التحديات والقدرة علي التكيف مع التغيرات الديناميكية السائدة في البيئة المحيطة.</p>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-timeline"></i> مراحل تطور الإدارة الإستراتيجية</div>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>المرحلة</th><th>المسمى</th><th>الخصائص والتركيز</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>الأولى</strong></td><td>التخطيط المالي الأساسي</td><td>الميزانية السنوية — الرقابة التشغيلية</td></tr>
+                        <tr><td><strong>الثانية</strong></td><td>التخطيط القائم على التنبؤ</td><td>التخطيط الفعال للنمو — التحليل البيئي — الرقابة التشغيلية — توزيع ثابت للموارد</td></tr>
+                        <tr><td><strong>الثالثة</strong></td><td>التخطيط الاستراتيجي الموجه خارجياً</td><td>التحليل التنافسي — الاستجابة للأسواق والمنافسة — تقييم البدائل — توزيع ديناميكي للموارد</td></tr>
+                        <tr><td><strong>الرابعة</strong></td><td>مرحلة الإدارة الإستراتيجية</td><td>إطار عمل تخطيطي استراتيجي — عمليات مرنة — مناخ ونظام قيمة مدعوم — بناء الميزة التنافسية</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-trophy"></i> فوائد الإدارة الاستراتيجية</div>
+            <div class="comparison-grid">
+                <div class="comparison-card" style="border-right:3px solid var(--accent-4)">
+                    <h4 style="color:var(--accent-4)"><i class="fas fa-coins"></i> الفوائد المالية</h4>
+                    <ul class="styled-list">
+                        <li>تحسن كبير في المبيعات والربحية والإنتاجية</li>
+                        <li>قرارات أكثر اطلاعاً مع توقع جيد للعواقب</li>
+                        <li>تحسين الأداء الاقتصادي للمنظمة</li>
+                        <li>آليات فعالة لإدارة المخاطر المالية</li>
+                        <li>تحقيق الاستدامة المالية</li>
+                    </ul>
+                </div>
+                <div class="comparison-card" style="border-right:3px solid var(--accent-2)">
+                    <h4 style="color:var(--accent-2)"><i class="fas fa-lightbulb"></i> الفوائد غير المالية</h4>
+                    <ul class="styled-list">
+                        <li>التعرف علي الفرص وتصنيفها واستغلالها</li>
+                        <li>رؤية موضوعية لمشاكل الإدارة</li>
+                        <li>إطار لتحسين التنسيق والسيطرة</li>
+                        <li>تقليل تأثيرات الظروف السلبية</li>
+                        <li>تخصيص الوقت والموارد بشكل أكثر فعالية</li>
+                        <li>إطار للتواصل الداخلي بين الأفراد</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 2 ===================== -->
+    <section class="lesson-section lesson-2" id="lesson2">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-sitemap"></i></div>
+            <div><h2>نماذج ومداخل الإدارة الاستراتيجية</h2><span class="lesson-num">الدرس الثاني</span></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-diagram-project"></i> نموذج عملية الإدارة الاستراتيجية</div>
+            <p style="color:var(--text-secondary);margin-bottom:20px;">تتكون عملية الإدارة الاستراتيجية من المراحل المتكاملة التالية، مع وجود تغذية معلوماتية راجعة (Feed-Back) مستمرة:</p>
+            <div class="process-flow">
+                <div class="process-step"><div class="step-num">1</div><h5>تحديد التوجه الاستراتيجي</h5><p>الرؤية — الرسالة — الأهداف</p></div>
+                <i class="fas fa-arrow-left process-arrow"></i>
+                <div class="process-step"><div class="step-num">2</div><h5>الرصد والتحليل</h5><p>SWOT — الموقف الاستراتيجي — الاختيار</p></div>
+                <i class="fas fa-arrow-left process-arrow"></i>
+                <div class="process-step"><div class="step-num">3</div><h5>التنفيذ الاستراتيجي</h5><p>تحويل الخطط إلى واقع</p></div>
+                <i class="fas fa-arrow-left process-arrow"></i>
+                <div class="process-step"><div class="step-num">4</div><h5>التقويم والرقابة</h5><p>قياس الأداء وتصحيح المسار</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-cubes"></i> المدخل القائم على الموارد (RBV)</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">يركز على أن الموارد الداخلية الفريدة للشركة هي العامل الأساسي في تحقيق الميزة التنافسية.</p>
+            <div class="callout callout-info"><strong>المبدأ الأساسي:</strong> الأداء يعتمد على الموارد الفريدة مثل المعرفة، التكنولوجيا، العلامة التجارية، والمهارات البشرية. | <strong>أدوات التحليل:</strong> إطار VRIO (القيمة، الندرة، صعوبة التقليد، الاستدامة التنظيمية).</div>
+            <div class="features-grid">
+                <div class="feature-card"><h4><i class="fas fa-money-bill-wave"></i> الموارد المالية</h4><p>جميع الموارد النقدية التي يمكن للشركة الحصول عليها.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-industry"></i> الموارد المادية</h4><p>الأراضي والمباني والمعدات والمواقع والمواد الخام.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-users"></i> الموارد البشرية</h4><p>مهارات وخبرات وكفاءات المديرين والموظفين.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-graduation-cap"></i> المعرفة التنظيمية</h4><p>المعرفة التنظيمية والتعلم المستمر.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-award"></i> الموارد التنظيمية العامة</h4><p>السمعة وأسماء العلامات التجارية وبراءات الاختراع والعلاقات.</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-link"></i> مدخل سلسلة القيمة (Value Chain)</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">قدم مايكل بورتر مفهوم سلسلة القيمة كإطار تحليلي لفحص أنشطة المنشأة التي تساهم في إنشاء وتقديم منتجات وخدمات للعملاء.</p>
+            <div class="comparison-grid">
+                <div class="comparison-card" style="border-right:3px solid var(--accent-1)">
+                    <h4 style="color:var(--accent-1)"><i class="fas fa-gears"></i> الأنشطة الأساسية</h4>
+                    <ul class="styled-list">
+                        <li>الإمداد الداخلي والخارجي</li><li>العمليات</li><li>التسويق والمبيعات</li><li>الخدمات</li>
+                    </ul>
+                </div>
+                <div class="comparison-card" style="border-right:3px solid var(--accent-3)">
+                    <h4 style="color:var(--accent-3)"><i class="fas fa-layer-group"></i> الأنشطة الداعمة</h4>
+                    <ul class="styled-list">
+                        <li>البنية التحتية</li><li>الموارد البشرية</li><li>التطور التكنولوجي</li><li>المشتريات</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-chart-line"></i> مدخل القيمة الاستراتيجية (Stegmann, 2009)</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">يعتمد على مقياس القيمة الاقتصادية المضافة (EVA) ويدمج النظريات الحديثة مثل نظرية موارد الشركة ونموذج رأس المال الفكري.</p>
+            <div class="features-grid">
+                <div class="feature-card"><h4><i class="fas fa-chart-area"></i> قوة السوق</h4><p>المحرك الأساسي للأرباح — السيطرة على السوق من خلال المبيعات والأسعار والارتباط بالعملاء.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-lightbulb"></i> الابتكار</h4><p>المفتاح الأساسي للنمو — أسواق جديدة ومنتجات جديدة تعزز المبيعات والنمو.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-boxes-stacked"></i> الموارد</h4><p>المحرك الأساسي لرأس المال — الملموسة وغير الملموسة تحقق قيمة مضافة إيجابية.</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-handshake"></i> نظرية التوافق الاستراتيجي</div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-info-circle"></i> المفهوم</div>
+                <p>عملية مواءمة وانسجام بين ثقافة المنظمة واستراتيجيتها وهيكلها والبنية التحتية التكنولوجية والعاملين بما يساعد المنظمة على امتلاك رؤية وأهداف استراتيجية واضحة. (Venkatraman & Henderson, 1993)</p>
+            </div>
+            <p style="color:var(--text-secondary);margin:12px 0;font-weight:600;">مكونات النظرية:</p>
+            <div class="features-grid" style="grid-template-columns: repeat(auto-fit,minmax(200px,1fr))">
+                <div class="feature-card"><h4><i class="fas fa-briefcase"></i> استراتيجية الأعمال</h4></div>
+                <div class="feature-card"><h4><i class="fas fa-microchip"></i> استراتيجية تكنولوجيا المعلومات</h4></div>
+                <div class="feature-card"><h4><i class="fas fa-building-columns"></i> البنية التحتية التنظيمية</h4></div>
+                <div class="feature-card"><h4><i class="fas fa-server"></i> البنية التحتية لتكنولوجيا المعلومات</h4></div>
+            </div>
+            <p style="color:var(--text-secondary);margin:16px 0;font-weight:600;">أنواع التوافق الاستراتيجي وفقاً لبورتر:</p>
+            <div class="features-grid">
+                <div class="feature-card"><h4><i class="fas fa-1"></i> الدرجة الأولى</h4><p>كل نشاط وظيفي يتوافق مباشرة مع الاستراتيجية العامة.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-2"></i> الدرجة الثانية</h4><p>الأنشطة تتوافق مع الاستراتيجية وتعزز بعضها البعض.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-3"></i> الدرجة الثالثة</h4><p>أعلى درجات التوافق — تحسين وتبادل المعلومات والأنشطة لتحقيق أقصى كفاءة.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 3 ===================== -->
+    <section class="lesson-section lesson-3" id="lesson3">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-brain"></i></div>
+            <div><h2>التفكير الاستراتيجي</h2><span class="lesson-num">الدرس الثالث</span></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-quote-right"></i> تعريف التفكير الاستراتيجي</div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-user-tie"></i> تعريف دافت (Daft, 1988)</div>
+                <p>تكوين رؤية بعيدة الأمد والنظرة للصورة الكبرى لكل من المنظمات وبيئتها وكيفية تحقيق التواؤم بينهما.</p>
+            </div>
+            <div class="callout callout-info">
+                <strong>Hamel & Prahalad:</strong> التفكير الاستراتيجي هو صناعة الهندسة المعمارية للاستراتيجية — تفكير تركيبي Synthesis أي التفكير بطريقة حدسية وإبداعية يستشرف المستقبل من وقائع الماضي ومتطلبات الحاضر.
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-star"></i> خصائص التفكير الاستراتيجي</div>
+            <div class="features-grid">
+                <div class="feature-card"><h4><i class="fas fa-arrows-split-up-and-left"></i> تفكير افتراقي Divergent</h4><p>يعتمد الإبداع والابتكار في البحث عن أفكار جديدة أو اكتشاف تطبيقات مستحدثة.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-object-group"></i> تفكير تجميعي بنائي Synthesizing</h4><p>يقوم علي الإدراك والحدس والاستبصار لاستحضار الصور البعيدة ورسم ملامح المستقبل.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-circle-nodes"></i> تفكير نظمي System Thinking</h4><p>اعتماد الرؤية الشمولية للعالم المحيط والانطلاقة من الكليات في تحليل الظواهر.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-swords"></i> تفكير تنافسي Competitive</h4><p>يقر بواقعية الصراع بين المنافسين ويتطلع إلي اقتناص الفرص قبل غيرهم.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-forward"></i> تفكير استباقي Proactive</h4><p>ينطلق من الرؤية الخارجية ليتعامل مع البيئة الداخلية.</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-table-cells"></i> نموذج التفكير الاستراتيجي لجين ليدكا (1998)</div>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>المكون الرئيسي</th><th>الوصف</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>منظور النظم</strong></td><td>التفكير الاستراتيجي ينظر للمنظمة كوحدة متكاملة، حيث تؤثر الأجزاء على بعضها البعض.</td></tr>
+                        <tr><td><strong>التركيز البؤري</strong></td><td>يحدد الاتجاه بوضوح ويعيد تشكيل الأهداف بمرونة.</td></tr>
+                        <tr><td><strong>التفكير في إطار الزمن</strong></td><td>يوازن بين الحاضر والمستقبل لتحقيق الأهداف.</td></tr>
+                        <tr><td><strong>الفرصة الذكية</strong></td><td>يستغل الفرص الجديدة بمرونة في بيئة متغيرة.</td></tr>
+                        <tr><td><strong>الفرضية المحركة</strong></td><td>تجمع بين الإبداع والتفكير النقدي في بناء الاستراتيجية.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 4 ===================== -->
+    <section class="lesson-section lesson-4" id="lesson4">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-compass"></i></div>
+            <div><h2>التوجه الاستراتيجي للمنظمة</h2><span class="lesson-num">الدرس الرابع</span></div>
+        </div>
+
+        <div class="callout callout-info" style="margin-bottom:24px;font-weight:600;">العناصر الأساسية: <span class="highlight">الرؤية</span> — <span class="highlight">الرسالة</span> — <span class="highlight">الأهداف</span> — <span class="highlight">القيم</span></div>
+
+        <div class="accordion">
+            <div class="accordion-item open">
+                <button class="accordion-header"><span><i class="fas fa-eye"></i> أولاً: الرؤية المستقبلية (الإستراتيجية)</span><i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-body">
+                    <div class="definition-block">
+                        <div class="def-author">تعريف الرؤية</div>
+                        <p>تصور فكري طموح وشامل ترسمه المنظمة حول المستقبل المرغوب. هي إجابة على السؤال: "بماذا نحلم؟"</p>
+                    </div>
+                    <p style="font-weight:700;margin:16px 0 10px;color:var(--text-primary);">خصائص الرؤية المستقبلية:</p>
+                    <ul class="styled-list">
+                        <li>أن ترتبط بمستقبل المنظمة</li>
+                        <li>أن تتسم بالوضوح والاستقرار النسبي</li>
+                        <li>أن تكون عامة وتشمل كل أجزاء المنظمة</li>
+                        <li>أن تكون منسجمة مع رسالة المنظمة وقيمها</li>
+                        <li>أن تتضمن نوعاً من التحدي والإلهام</li>
+                        <li>أن تترجم إلي استراتيجيات وأهداف مترابطة</li>
+                    </ul>
+                    <div class="example-box">
+                        <div class="example-label"><i class="fas fa-building"></i> نماذج رؤية مستقبلية</div>
+                        <ul class="styled-list">
+                            <li><strong>سوزوكي:</strong> الريادة في صناعة السيارات الهندية وخلق متعة للعملاء</li>
+                            <li><strong>ديزني:</strong> أن نكون أحد المنتجين والمزودين الرائدين في العالم للترفيه والمعلومات</li>
+                            <li><strong>مايكروسوفت:</strong> نحن نسعى جاهدين لخلق الفرص المحلية والنمو والتأثير في كل بلد حول العالم</li>
+                            <li><strong>جامعة القاهرة:</strong> أن تكون من أفضل جامعات الجيل الثالث العالمية المشهود لها بالتميز</li>
+                            <li><strong>رؤية مصر 2030:</strong> اقتصاد تنافسي ومتوازن ومتنوع يعتمد على الابتكار والمعرفة</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header"><span><i class="fas fa-bullseye"></i> ثانياً: رسالة المنظمة (Mission)</span><i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-body">
+                    <div class="definition-block">
+                        <div class="def-author">تعريف الرسالة</div>
+                        <p>الخصائص الفريدة التي تجعل المنظمة مميزة عن غيرها. الغرض أو السبب في وجودها. تجيب عن سؤال: "لماذا نوجد أصلاً؟"</p>
+                    </div>
+                    <p style="font-weight:700;margin:16px 0 10px;color:var(--text-primary);">خصائص الرسالة الجيدة:</p>
+                    <ul class="styled-list">
+                        <li>أن تكون جامعة وسهلة الفهم</li>
+                        <li>مكونة من فقرة واحدة تصف مجالات الأعمال الرئيسية</li>
+                        <li>تعمل على إرشاد وتوجيه المديرين عند صياغة الإستراتيجية</li>
+                        <li>واقعية تتناسب مع إمكانيات المنظمة</li>
+                        <li>يتم نشرها وإبلاغ العاملين بها داخلياً وخارجياً</li>
+                    </ul>
+                    <p style="font-weight:700;margin:16px 0 10px;color:var(--text-primary);">مكونات وأبعاد الرسالة:</p>
+                    <div class="features-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+                        <div class="feature-card"><h4>مجال العمل</h4><p>زراعي / صناعي / خدمي</p></div>
+                        <div class="feature-card"><h4>العملاء</h4><p>الفئة المستهدفة بالسلع والخدمات</p></div>
+                        <div class="feature-card"><h4>المنتجات</h4><p>السلع والخدمات المقدمة</p></div>
+                        <div class="feature-card"><h4>الأسواق</h4><p>الأسواق الجغرافية والتنافسية</p></div>
+                        <div class="feature-card"><h4>التكنولوجيا</h4><p>الجانب الفني والمعرفي</p></div>
+                        <div class="feature-card"><h4>البقاء والنمو والربحية</h4><p>أهداف أساسية للاستمرار</p></div>
+                        <div class="feature-card"><h4>الميثاق الأخلاقي</h4><p>القيم والثقافة التنظيمية</p></div>
+                        <div class="feature-card"><h4>السمعة المؤسسية</h4><p>انطباعات الجمهور والعملاء</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header"><span><i class="fas fa-not-equal"></i> الفرق بين الرؤية والرسالة</span><i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-body">
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>الخاصية</th><th>الرؤية</th><th>الرسالة</th></tr></thead>
+                            <tbody>
+                                <tr><td>التعريف</td><td>الطموحات المستقبلية للمؤسسة</td><td>الغرض الأساسي ودورها في الحاضر</td></tr>
+                                <tr><td>التركيز الزمني</td><td>طويلة المدى (5-10 سنوات)</td><td>قصيرة إلى متوسطة المدى</td></tr>
+                                <tr><td>المحتوى</td><td>توجهات مستقبلية وأهداف طموحة</td><td>ماذا تفعل ولماذا تفعله</td></tr>
+                                <tr><td>الهدف</td><td>تحديد الاتجاه المستقبلي</td><td>توجيه الأنشطة الحالية</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header"><span><i class="fas fa-flag-checkered"></i> ثالثاً: أهداف المنظمة</span><i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-body">
+                    <div class="features-grid">
+                        <div class="feature-card" style="border-right:3px solid var(--accent-5)"><h4>المرامي</h4><p>الأهداف المطلوب تحقيقها الآن وفي المستقبل القريب (سنة مثلاً).</p></div>
+                        <div class="feature-card" style="border-right:3px solid var(--accent-2)"><h4>الأهداف Objectives</h4><p>لفترة أطول قد تمتد لثلاث أو خمس سنوات — يجب أن يكون الهدف جيدا وموجها نحو العمل.</p></div>
+                        <div class="feature-card" style="border-right:3px solid var(--accent-1)"><h4>الغايات Goals</h4><p>أهداف طويلة الأجل — بيان مفتوح لما ترغب المنظمة في تحقيقه دون تحديد مقداره أو معايير زمنية.</p></div>
+                    </div>
+                    <p style="font-weight:700;margin:16px 0 10px;color:var(--text-primary);">الأهداف الذكية SMART:</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>الحرف</th><th>الكلمة</th><th>المعنى</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>S</strong></td><td>Specific</td><td>أن يكون الهدف دقيقاً ومحدداً</td></tr>
+                                <tr><td><strong>M</strong></td><td>Measurable</td><td>أن يكون قابلاً للقياس</td></tr>
+                                <tr><td><strong>A</strong></td><td>Achievable</td><td>أن يكون قابلاً للإنجاز</td></tr>
+                                <tr><td><strong>R</strong></td><td>Realistic</td><td>أن يكون واقعياً</td></tr>
+                                <tr><td><strong>T</strong></td><td>Time</td><td>أن يكون له إطار زمني</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <button class="accordion-header"><span><i class="fas fa-heart"></i> رابعاً: قيم المنظمة</span><i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-body">
+                    <div class="definition-block">
+                        <div class="def-author">تعريف القيم</div>
+                        <p>مجموعة المبادئ والمعتقدات الأساسية التي تحكم سلوك الأفراد داخل المنظمة، وتوجه قراراتها وتصرفاتها بما يتسق مع هويتها وثقافتها.</p>
+                    </div>
+                    <div class="features-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+                        <div class="feature-card"><h4>النزاهة</h4></div>
+                        <div class="feature-card"><h4>الشفافية</h4></div>
+                        <div class="feature-card"><h4>الابتكار</h4></div>
+                        <div class="feature-card"><h4>العمل الجماعي</h4></div>
+                        <div class="feature-card"><h4>احترام العميل</h4></div>
+                        <div class="feature-card"><h4>الجودة</h4></div>
+                        <div class="feature-card"><h4>الاستدامة</h4></div>
+                        <div class="feature-card"><h4>المسؤولية المجتمعية</h4></div>
+                    </div>
+                    <div class="example-box">
+                        <div class="example-label"><i class="fas fa-building"></i> أمثلة تطبيقية</div>
+                        <ul class="styled-list">
+                            <li><strong>Toyota:</strong> الاحترام والتحسين المستمر (Kaizen)</li>
+                            <li><strong>Google:</strong> الابتكار والانفتاح وتبادل المعرفة</li>
+                            <li><strong>IKEA:</strong> البساطة وتخفيض التكلفة مع الجودة</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 5 ===================== -->
+    <section class="lesson-section lesson-5" id="lesson5">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-globe"></i></div>
+            <div><h2>تحليل البيئة الخارجية</h2><span class="lesson-num">الدرس الخامس</span></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-magnifying-glass-chart"></i> تحليل PESTEL</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">أداة لفحص العوامل الخارجية التي تؤثر على المنظمات وتساعد في دراسة تقييم الفرص والتهديدات.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>العنصر</th><th>الشرح</th><th>مثال</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong style="color:var(--accent-6)">P</strong> — Political</td><td>القوانين، السياسات الحكومية</td><td>فرض ضريبة جديدة</td></tr>
+                        <tr><td><strong style="color:var(--accent-4)">E</strong> — Economic</td><td>التضخم، البطالة، أسعار الصرف</td><td>ارتفاع سعر الدولار</td></tr>
+                        <tr><td><strong style="color:var(--accent-2)">S</strong> — Social</td><td>الثقافة، العادات، السكان</td><td>زيادة الوعي الصحي</td></tr>
+                        <tr><td><strong style="color:var(--accent-3)">T</strong> — Technological</td><td>الابتكارات، التكنولوجيا الحديثة</td><td>التحول نحو التجارة الإلكترونية</td></tr>
+                        <tr><td><strong style="color:var(--accent-5)">E</strong> — Environmental</td><td>التغيرات المناخية، البيئة</td><td>قوانين حماية البيئة</td></tr>
+                        <tr><td><strong style="color:var(--accent-1)">L</strong> — Legal</td><td>القوانين واللوائح</td><td>قوانين العمل والضرائب</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-car"></i> مثال تطبيقي: تحليل PESTEL لشركة Tesla</div>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>العامل</th><th>الوزن النسبي</th><th>التقييم (1-5)</th><th>النتيجة</th></tr></thead>
+                    <tbody>
+                        <tr><td>السياسي (P)</td><td>15%</td><td>4</td><td>0.60</td></tr>
+                        <tr><td>الاقتصادي (E)</td><td>25%</td><td>5</td><td>1.25</td></tr>
+                        <tr><td>الاجتماعي (S)</td><td>10%</td><td>3</td><td>0.30</td></tr>
+                        <tr><td>التكنولوجي (T)</td><td>30%</td><td>5</td><td><strong style="color:var(--accent-4)">1.50</strong></td></tr>
+                        <tr><td>البيئي (E)</td><td>10%</td><td>4</td><td>0.40</td></tr>
+                        <tr><td>القانوني (L)</td><td>10%</td><td>3</td><td>0.30</td></tr>
+                        <tr style="font-weight:700"><td>المجموع</td><td>100%</td><td></td><td style="color:var(--accent-4)">4.35/5</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout callout-info">العامل التكنولوجي هو الأكثر تأثيراً (1.50)، يليه الاقتصادي (1.25). يجب التركيز على البحث والتطوير ومتابعة أسعار المواد الخام.</div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-chess-board"></i> نموذج القوى الخمس لبورتر (Porter's Five Forces)</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">أداة استراتيجية طورها مايكل بورتر عام 1980 لتحليل مدى جاذبية وربحية أي صناعة.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>القوة</th><th>الشرح</th><th>أسئلة التحليل</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>تهديد الداخلين الجدد</strong></td><td>مدي سهولة دخول منافسين جدد</td><td>حواجز قانونية أو مالية؟ تكلفة بدء النشاط؟ علامات تجارية قوية؟</td></tr>
+                        <tr><td><strong>قوة الموردين</strong></td><td>قدرة الموردين علي رفع الأسعار</td><td>عدد قليل من الموردين؟ توافر البدائل؟ أهمية المورد؟</td></tr>
+                        <tr><td><strong>قوة المشترين</strong></td><td>قدرة العملاء علي التفاوض</td><td>عدد كبير من العملاء؟ بدائل أخرى؟ حساسية للسعر؟</td></tr>
+                        <tr><td><strong>تهديد البدائل</strong></td><td>إمكانية الاستبدال بمنتجات بديلة</td><td>بدائل أرخص أو أفضل؟ جودة مماثلة؟ سهولة الحصول؟</td></tr>
+                        <tr><td><strong>حدة المنافسة الحالية</strong></td><td>شدة التنافس بين الشركات</td><td>عدد المنافسين؟ السوق ينمو أو مستقر؟ اختلاف المنتجات؟</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 6 ===================== -->
+    <section class="lesson-section lesson-6" id="lesson6">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-chart-bar"></i></div>
+            <div><h2>تحليل البيئة الداخلية والتنافسية</h2><span class="lesson-num">الدرس السادس</span></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-table-cells-large"></i> مصفوفة تقييم العوامل الداخلية (IFE Matrix)</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">أداة تحليل استراتيجي لتقييم البيئة الداخلية من خلال تحليل نقاط القوة والضعف.</p>
+            <ol class="steps-list">
+                <li>تحديد العوامل الداخلية الرئيسية (نقاط القوة والضعف)</li>
+                <li>إعطاء وزن لكل عامل بين (0.0 إلي 1.0) بحيث المجموع = 1</li>
+                <li>تقييم كل عامل: 4 = قوة كبيرة، 3 = قوة طفيفة، 2 = ضعف طفيف، 1 = ضعف كبير</li>
+                <li>حساب النتيجة الموزونة: الوزن × التقييم</li>
+                <li>حساب مجموع القيم الموزونة للنتيجة النهائية</li>
+            </ol>
+            <div class="callout callout-warning" style="margin-top:16px;">أقل من 2.5 ← أداء داخلي ضعيف | أكبر من 2.5 ← أداء داخلي قوي</div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-mobile-screen"></i> مصفوفة الملف التنافسي (CPM) — مثال: Apple vs Samsung vs OnePlus</div>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>عوامل النجاح الحرجة</th><th>الوزن</th><th>Apple</th><th>النتيجة</th><th>Samsung</th><th>النتيجة</th><th>OnePlus</th><th>النتيجة</th></tr></thead>
+                    <tbody>
+                        <tr><td>جودة المنتج</td><td>0.20</td><td>4</td><td>0.80</td><td>3</td><td>0.60</td><td>2</td><td>0.40</td></tr>
+                        <tr><td>نظام التشغيل</td><td>0.15</td><td>4</td><td>0.60</td><td>3</td><td>0.45</td><td>2</td><td>0.30</td></tr>
+                        <tr><td>الابتكار التكنولوجي</td><td>0.20</td><td>3</td><td>0.60</td><td>4</td><td>0.80</td><td>3</td><td>0.60</td></tr>
+                        <tr><td>السعر والتنافسية</td><td>0.15</td><td>2</td><td>0.30</td><td>3</td><td>0.45</td><td>4</td><td>0.60</td></tr>
+                        <tr><td>التسويق وحصة السوق</td><td>0.20</td><td>4</td><td>0.80</td><td>3</td><td>0.60</td><td>2</td><td>0.40</td></tr>
+                        <tr><td>خدمة ما بعد البيع</td><td>0.10</td><td>3</td><td>0.30</td><td>4</td><td>0.40</td><td>3</td><td>0.30</td></tr>
+                        <tr style="font-weight:700"><td>المجموع</td><td>1.00</td><td></td><td style="color:var(--accent-4)">3.40</td><td></td><td>3.30</td><td></td><td>2.60</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout callout-info">Apple (3.40) الأقوى بسبب الجودة والتسويق، Samsung (3.30) متفوقة في الابتكار، OnePlus (2.60) تحتاج لتحسين.</div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-crosshairs"></i> مصفوفة SPACE</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">تحليل الوضع التنافسي عبر أربعة أبعاد: القوة المالية، الميزة التنافسية، جاذبية الصناعة، الاستقرار البيئي.</p>
+            <div class="features-grid">
+                <div class="feature-card" style="text-align:center"><h4 style="color:var(--accent-4)">↗ هجومية</h4><p>X موجب + Y موجب<br>تكامل — اختراق — تطوير — تنويع</p></div>
+                <div class="feature-card" style="text-align:center"><h4 style="color:var(--accent-2)">↙ محافظة</h4><p>X سالب + Y موجب<br>اختراق السوق — تطوير المنتج</p></div>
+                <div class="feature-card" style="text-align:center"><h4 style="color:var(--accent-5)">↘ تنافسية</h4><p>X موجب + Y سالب<br>تكامل — اختراق — تطوير</p></div>
+                <div class="feature-card" style="text-align:center"><h4 style="color:var(--accent-6)">↙ دفاعية</h4><p>X سالب + Y سالب<br>تقليص — تصفية — تنويع مرتبط</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-arrow-up-right-dots"></i> مصفوفة تقييم العوامل الخارجية (EFE) — شركة Fresh</div>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>العوامل</th><th>الوزن</th><th>التقييم</th><th>النتيجة المرجحة</th></tr></thead>
+                    <tbody>
+                        <tr><td colspan="4" style="font-weight:700;color:var(--accent-4)">الفرص الخارجية</td></tr>
+                        <tr><td>زيادة الطلب على الأجهزة الذكية</td><td>0.20</td><td>4</td><td>0.80</td></tr>
+                        <tr><td>دعم الحكومة للصناعات التكنولوجية</td><td>0.15</td><td>3</td><td>0.45</td></tr>
+                        <tr><td>انخفاض أسعار المواد الخام</td><td>0.10</td><td>2</td><td>0.20</td></tr>
+                        <tr><td colspan="4" style="font-weight:700;color:var(--accent-6)">التهديدات الخارجية</td></tr>
+                        <tr><td>ارتفاع المنافسة</td><td>0.25</td><td>2</td><td>0.50</td></tr>
+                        <tr><td>تغير اللوائح الحكومية</td><td>0.15</td><td>3</td><td>0.45</td></tr>
+                        <tr><td>التقنيات البديلة المنافسة</td><td>0.10</td><td>1</td><td>0.10</td></tr>
+                        <tr><td>تقلب أسعار صرف العملات</td><td>0.05</td><td>2</td><td>0.10</td></tr>
+                        <tr style="font-weight:700"><td>المجموع</td><td>1.00</td><td></td><td style="color:var(--accent-4)">2.60</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout callout-info">النتيجة 2.60 (أكبر من 2.5) = الشركة تستجيب بشكل جيد للفرص والتهديدات الخارجية.</div>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 7 ===================== -->
+    <section class="lesson-section lesson-7" id="lesson7">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-puzzle-piece"></i></div>
+            <div><h2>التحليل الاستراتيجي الشامل</h2><span class="lesson-num">الدرس السابع</span></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-table-columns"></i> تحليل SWOT</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">أسلوب تحليلي لمعرفة نقاط القوة والضعف في المؤسسة ومعرفة الفرص والتهديدات.</p>
+            <div class="bcg-grid">
+                <div class="bcg-card bcg-stars"><h4 style="color:var(--accent-4)"><i class="fas fa-plus-circle"></i> نقاط القوة Strengths</h4><p style="font-size:0.85rem;color:var(--text-secondary)">إمكانيات داخلية تساعد على استغلال الفرص ومكافحة التهديدات</p></div>
+                <div class="bcg-card bcg-dogs"><h4 style="color:var(--accent-6)"><i class="fas fa-minus-circle"></i> نقاط الضعف Weaknesses</h4><p style="font-size:0.85rem;color:var(--text-secondary)">عوامل نقص داخلية تعيق القدرة على استغلال الفرص</p></div>
+                <div class="bcg-card bcg-cash"><h4 style="color:var(--accent-2)"><i class="fas fa-door-open"></i> الفرص Opportunities</h4><p style="font-size:0.85rem;color:var(--text-secondary)">ظروف خارجية ذات أثر إيجابي تمكن فرصة للتطور والنمو</p></div>
+                <div class="bcg-card bcg-question"><h4 style="color:var(--accent-5)"><i class="fas fa-exclamation-triangle"></i> التهديدات Threats</h4><p style="font-size:0.85rem;color:var(--text-secondary)">ظروف خارجية قد تؤثر سلباً أو تسبب خسارة وضرر</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-hamburger"></i> تطبيق SWOT على ماكدونالدز</div>
+            <div class="bcg-grid">
+                <div class="comparison-card" style="border-right:3px solid var(--accent-4)">
+                    <h4 style="color:var(--accent-4)">نقاط القوة</h4>
+                    <ul class="styled-list"><li>علامة تجارية معروفة عالمياً</li><li>عمليات عالمية ومنظمة</li><li>مواقع ممتازة للمحلات</li><li>مكونات صنف أول</li><li>علاقات قوية بالموردين</li></ul>
+                </div>
+                <div class="comparison-card" style="border-right:3px solid var(--accent-6)">
+                    <h4 style="color:var(--accent-6)">نقاط الضعف</h4>
+                    <ul class="styled-list"><li>الدوران المرتفع للكادر الوظيفي</li><li>التركيز القليل على الأطعمة العضوية</li><li>التنوع المحدود في المنتجات الموسمية</li><li>التركيز على المنتجات غير الصحية</li></ul>
+                </div>
+                <div class="comparison-card" style="border-right:3px solid var(--accent-2)">
+                    <h4 style="color:var(--accent-2)">الفرص</h4>
+                    <ul class="styled-list"><li>افتتاح مشاريع مشتركة</li><li>الاستجابة للخيارات الصحية</li><li>المبادرات المجتمعية</li><li>التوسع في أسواق جديدة</li></ul>
+                </div>
+                <div class="comparison-card" style="border-right:3px solid var(--accent-5)">
+                    <h4 style="color:var(--accent-5)">التهديدات</h4>
+                    <ul class="styled-list"><li>مخاطر التلوث الغذائي</li><li>اتجاهات نحو الحياة الصحية</li><li>الانكماش الاقتصادي في الأسواق الرئيسية</li></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-grip"></i> نموذج مجموعة بوسطن الاستشارية (BCG Matrix)</div>
+            <div class="bcg-grid">
+                <div class="bcg-card bcg-stars"><div class="bcg-icon"><i class="fas fa-star"></i></div><h4>النجوم Stars</h4><p style="font-size:0.85rem;color:var(--text-secondary)">نمو مرتفع + حصة سوقية مرتفعة<br>تحتاج استثمارات كبيرة للحفاظ على النمو</p></div>
+                <div class="bcg-card bcg-question"><div class="bcg-icon"><i class="fas fa-question"></i></div><h4>علامة الاستفهام</h4><p style="font-size:0.85rem;color:var(--text-secondary)">نمو مرتفع + حصة سوقية منخفضة<br>تحتاج قرار: استثمار أو تصفية</p></div>
+                <div class="bcg-card bcg-cash"><div class="bcg-icon"><i class="fas fa-coins"></i></div><h4>البقرة الحلوب</h4><p style="font-size:0.85rem;color:var(--text-secondary)">نمو منخفض + حصة سوقية مرتفعة<br>تولد نقدية عالية بدون استثمارات كبيرة</p></div>
+                <div class="bcg-card bcg-dogs"><div class="bcg-icon"><i class="fas fa-dog"></i></div><h4>الكلاب Dogs</h4><p style="font-size:0.85rem;color:var(--text-secondary)">نمو منخفض + حصة سوقية منخفضة<br>مرشحة للتصفية أو إعادة الهيكلة</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-calculator"></i> مصفوفة التخطيط الاستراتيجي الكمي (QSPM)</div>
+            <p style="color:var(--text-secondary);margin-bottom:16px;">أداة تساعد المؤسسات على تقييم البدائل الاستراتيجية وتحديد أولوياتها بموضوعية.</p>
+            <ol class="steps-list">
+                <li>تحديد العوامل الرئيسية من مصفوفات IFE و EFE</li>
+                <li>تعيين الأوزان بحيث يصل المجموع إلى 1</li>
+                <li>تحديد الخيارات الاستراتيجية قيد الدراسة</li>
+                <li>تعيين درجات الجاذبية (1= غير جذابة، 4= جذابة للغاية)</li>
+                <li>حساب إجمالي درجات الجاذبية (TAS): الوزن × درجة الجاذبية</li>
+                <li>مقارنة النتائج — الأعلى هي الخيار الأكثر جاذبية</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 8 ===================== -->
+    <section class="lesson-section lesson-8" id="lesson8">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-rocket"></i></div>
+            <div><h2>البدائل الاستراتيجية والتنفيذ والرقابة</h2><span class="lesson-num">الدرس الثامن</span></div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-route"></i> البدائل الاستراتيجية</div>
+            <div class="features-grid">
+                <div class="feature-card"><h4><i class="fas fa-bullseye"></i> النمو المتمركز</h4><p>التركيز علي منتج وحيد مربح باعتباره دعامة أساسية للمنظمة (مثل Wrigley).</p></div>
+                <div class="feature-card"><h4><i class="fas fa-map-location-dot"></i> تنمية السوق</h4><p>إضافة عملاء جدد في أسواق مترابطة من خلال التوسع الجغرافي أو حقوق الامتياز.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-box-open"></i> تنمية المنتج</h4><p>خلق منتجات جديدة مترابطة يمكن بيعها في الأسواق الحالية (مثل فيلبس).</p></div>
+                <div class="feature-card"><h4><i class="fas fa-wand-magic-sparkles"></i> الابتكار</h4><p>خلق منتجات جديدة ومتفوقة عن المنتجات الحالية (مثل 3M).</p></div>
+                <div class="feature-card"><h4><i class="fas fa-arrows-left-right"></i> التكامل الأفقي</h4><p>امتلاك أو زيادة السيطرة علي الشركات المنافسة في نفس الصناعة.</p></div>
+                <div class="feature-card"><h4><i class="fas fa-arrows-up-down"></i> التكامل الرأسي</h4><p><strong>أمامي:</strong> السيطرة على منافذ التوزيع. <strong>خلفي:</strong> السيطرة على مصادر التوريد.</p></div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-shuffle"></i> استراتيجيات التنويع</div>
+            <div class="comparison-grid">
+                <div class="comparison-card" style="border-right:3px solid var(--accent-4)">
+                    <h4 style="color:var(--accent-4)">التنويع المرتبط</h4>
+                    <p style="font-size:0.9rem;color:var(--text-secondary)">إضافة أنشطة لها ارتباط بالعمليات الحالية — الاستفادة من نفس الخبرة والإمكانات والفن التكنولوجي.</p>
+                </div>
+                <div class="comparison-card" style="border-right:3px solid var(--accent-6)">
+                    <h4 style="color:var(--accent-6)">التنويع غير المرتبط</h4>
+                    <p style="font-size:0.9rem;color:var(--text-secondary)">التحول إلي مجالات وعمليات لا ترتبط بالعمليات الحالية — عندما تكون فرص النمو الحالية محدودة.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-play-circle"></i> تنفيذ الاستراتيجية</div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-info-circle"></i> المفهوم (Johnson & Jauche)</div>
+                <p>العملية التي ينوط بها تحويل الاستراتيجية من موضوعها النظري إلى واقعها العملي وذلك بتحويلها إلى إجراءات عمل في إطار بناء نظم التخطيط وتخصيص الموارد البشرية والمادية ونظم الحوافز والمعلومات.</p>
+            </div>
+            <p style="font-weight:700;margin:16px 0 10px;color:var(--text-primary)">العلاقة بين الصياغة والتنفيذ:</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th></th><th style="color:var(--accent-4)">تنفيذ جيد</th><th style="color:var(--accent-6)">تنفيذ ضعيف</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>صياغة جيدة</strong></td><td style="color:var(--accent-4)">✅ نجاح — تحقيق الأهداف</td><td style="color:var(--accent-5)">⚠️ مشاكل — التنفيذ يعيق الاستراتيجية</td></tr>
+                        <tr><td><strong>صياغة ضعيفة</strong></td><td style="color:var(--accent-2)">🔄 إنقاذ — التنفيذ الجيد قد ينقذ أو يسارع بالفشل</td><td style="color:var(--accent-6)">❌ فشل — يصعب تحديد الأسباب</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-shield-halved"></i> الرقابة الاستراتيجية</div>
+            <div class="definition-block">
+                <div class="def-author"><i class="fas fa-user-tie"></i> تعريف Procter</div>
+                <p>تلك العملية المستمرة بغرض اكتشاف وقياس الانحراف عن النتائج المرغوب فيها واتخاذ الإجراءات التصحيحية.</p>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>المستوى</th><th>نطاق الممارسة</th><th>الهدف</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>الاستراتيجي</strong></td><td>الاستراتيجية العليا</td><td>الرقابة على الاتجاه الاستراتيجي الكلي</td></tr>
+                        <tr><td><strong>التكتيكي</strong></td><td>مستوى وحدة العمل</td><td>الرقابة على نظام التخطيط</td></tr>
+                        <tr><td><strong>التشغيلي</strong></td><td>الاستراتيجية التشغيلية</td><td>الرقابة على الخطط قصيرة المدى</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-gauge-high"></i> بطاقة الأداء المتوازن (BSC)</div>
+            <div class="bsc-grid">
+                <div class="bsc-card" style="border-right:3px solid var(--accent-4)">
+                    <h4 style="color:var(--accent-4)"><i class="fas fa-coins"></i> النظرة المالية</h4>
+                    <p style="font-size:0.85rem;color:var(--text-secondary)">العائد على الاستثمار — القيمة المضافة — الربحية والتكاليف — دورة رأس المال</p>
+                </div>
+                <div class="bsc-card" style="border-right:3px solid var(--accent-2)">
+                    <h4 style="color:var(--accent-2)"><i class="fas fa-gears"></i> النظرة للعمليات</h4>
+                    <p style="font-size:0.85rem;color:var(--text-secondary)">الجودة — الوقت — التكلفة — منتجات جديدة</p>
+                </div>
+                <div class="bsc-card" style="border-right:3px solid var(--accent-5)">
+                    <h4 style="color:var(--accent-5)"><i class="fas fa-users"></i> النظرة للعملاء</h4>
+                    <p style="font-size:0.85rem;color:var(--text-secondary)">الرضا — النصيب التسويقي — التسويق — السوق</p>
+                </div>
+                <div class="bsc-card" style="border-right:3px solid var(--accent-1)">
+                    <h4 style="color:var(--accent-1)"><i class="fas fa-graduation-cap"></i> النظرة البشرية والتطوير</h4>
+                    <p style="font-size:0.85rem;color:var(--text-secondary)">التعليم والنمو — التدريب — إدارة المعرفة — المعلومات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LESSON 9 - QUIZ ===================== -->
+    <section class="lesson-section lesson-9" id="lesson9">
+        <div class="lesson-header">
+            <div class="lesson-icon"><i class="fas fa-clipboard-check"></i></div>
+            <div><h2>أسئلة استرشادية</h2><span class="lesson-num">الدرس التاسع — اختبر نفسك!</span></div>
+        </div>
+
+        <!-- True/False Questions -->
+        <div class="glass-card">
+            <div class="card-title"><i class="fas fa-check-double"></i> أسئلة صح وخطأ</div>
+            <div class="quiz-container" id="tfQuiz"></div>
+            <button class="score-btn" onclick="scoreTFQuiz()"><i class="fas fa-chart-pie"></i> عرض النتيجة</button>
+            <div class="score-display" id="tfScore" style="display:none">
+                <div class="score-num" id="tfScoreNum">0</div>
+                <p id="tfScoreText" style="color:var(--text-secondary)"></p>
+            </div>
+        </div>
+
+        <!-- MCQ Questions -->
+        <div class="glass-card" style="margin-top:32px">
+            <div class="card-title"><i class="fas fa-list-check"></i> أسئلة اختيار من متعدد</div>
+            <div class="quiz-container" id="mcqQuiz"></div>
+            <button class="score-btn" onclick="scoreMCQQuiz()"><i class="fas fa-chart-pie"></i> عرض النتيجة</button>
+            <div class="score-display" id="mcqScore" style="display:none">
+                <div class="score-num" id="mcqScoreNum">0</div>
+                <p id="mcqScoreText" style="color:var(--text-secondary)"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand"><i class="fas fa-chess-rook"></i> الإدارة الاستراتيجية</div>
+        <p>المراجعة النهائية — المستوى الثالث — ٢٠٢٦</p>
+        <p style="margin-top:8px;">تم إعداد هذه المراجعة للأغراض التعليمية — الشيماء (المستشار)</p>
+    </footer>
+
+</main>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" aria-label="العودة للأعلى"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+// ============ Quiz Data ============
+const tfQuestions = [
+    {q: "ترتبط الاستراتيجية بفن القيادة أو فن الحرب.", a: true},
+    {q: "يرتبط مفهوم P5 بالمفكر الاستراتيجي \"مايكل بورتر\".", a: false},
+    {q: "تقع مسؤولية الإدارة الاستراتيجية على عاتق الإدارة التنفيذية في المؤسسة.", a: false},
+    {q: "من عوامل نجاح تطبيق الإدارة الاستراتيجية توافر الفكر الاستراتيجي.", a: true},
+    {q: "يقتصر التفكير الاستراتيجي على مهارة اكتشاف ما الذي سيحدث.", a: false},
+    {q: "من مكونات التوجه الاستراتيجي الرؤية، الرسالة، الأهداف، والقيم.", a: true},
+    {q: "يرى هاميل وبراهاد أن التفكير الاستراتيجي هو \"صناعة الهندسة المعمارية للاستراتيجية\".", a: true},
+    {q: "يرى \"بورتر\" أن التخطيط الاستراتيجي الجيد يرتقي بمستوى التفكير الاستراتيجي.", a: false},
+    {q: "يشير التخطيط الاستراتيجي إلى تلك القدرات والمهارات الفكرية والذهنية الضرورية للقيام بالمهام الاستراتيجية.", a: false},
+    {q: "التفكير التباعدي Divergent يقوي واقعية الصراع بين المنافسين ويتطلع إلى اقتناص الفرص.", a: false},
+    {q: "التفكير النظمي System Thinking يعتمد الرؤية الشمولية للعالم المحيط والانطلاقة من الكليات.", a: true},
+    {q: "يعتبر الإبداع من عناصر التفكير الاستراتيجي.", a: true},
+    {q: "التفكير الشمولي هو فهم المفاهيم المجردة وتحليل المشكلات بطرق إبداعية.", a: false},
+    {q: "التفكير التخطيطي هو تحليل يحدد الأسباب الجذرية للمشكلات عبر فحص الأدلة.", a: false},
+    {q: "ضعف قدرة المدراء على التنبؤ الاستراتيجي ومقاومة التغيير من المعوقات التنظيمية.", a: true},
+    {q: "غياب الهيكل المرن وانتشار البيروقراطية من المعوقات البيئية للتفكير الاستراتيجي.", a: false},
+    {q: "المنتجات البديلة تسبب ضغوطاً تنافسية بين الشركات العاملة في الصناعة الواحدة.", a: false},
+    {q: "يعتبر تحليل PESTEL بمثابة إطار عمل لتحليل البيئة الخارجية الكلية أو العامة للمنظمة.", a: true},
+    {q: "تختلف الرؤية عن الرسالة في أن الرسالة ما هي إلا طموحات المنظمة وآمالها في المستقبل.", a: false},
+    {q: "يقصد بالغايات الأهداف المطلوب تحقيقها في غصون من ثلاث إلى خمس سنوات.", a: false},
+    {q: "من مكونات وأبعاد مهمة / أو غرض المنظمة هو تحديد مجال عمل المنظمة فقط.", a: false}
+];
+
+const mcqQuestions = [
+    {q: "أي من التعريفات التالية يصف الاستراتيجية بدقة؟", opts:["خطة تفصيلية تحدد كافة الخطوات التنفيذية","عملية تحديد الأهداف طويلة المدى واتخاذ القرارات لتحقيقها","طريقة لتنفيذ المهام اليومية","إدارة العمليات التشغيلية فقط"], a:1},
+    {q: "أي من العوامل التالية يؤثر بشكل مباشر على صياغة الاستراتيجية؟", opts:["البيئة الخارجية فقط","القدرات الداخلية فقط","البيئة الخارجية والقدرات الداخلية معاً","أداء الموظفين فقط"], a:2},
+    {q: "في أي مرحلة بدأ التركيز على التحليل التنافسي؟", opts:["التخطيط المالي الأساسي","التخطيط القائم على التنبؤ","التخطيط الاستراتيجي الموجه خارجياً","الإدارة الاستراتيجية"], a:2},
+    {q: "أي مرحلة يطلق عليها الفترة الزاهية أو مرحلة التوجه البيئي؟", opts:["التخطيط المالي الأساسي","التخطيط القائم على التنبؤ","التخطيط الاستراتيجي الموجه خارجياً","الإدارة الاستراتيجية"], a:3},
+    {q: "أي عبارة تصف مرحلة التخطيط المالي الأساسي؟", opts:["التركيز على الميزانية","توقعات التغيرات البيئية","رؤية طويلة المدى وأهداف","التحليل الاستراتيجي المستمر"], a:0},
+    {q: "ما هي الخطوة الأولى في نموذج عمليات الإدارة الاستراتيجية؟", opts:["تنفيذ الاستراتيجية","صياغة الاستراتيجية","التقييم والتحليل الاستراتيجي","الرقابة الاستراتيجية"], a:1},
+    {q: "تهديد الداخلون الجدد من عناصر نموذج ...", opts:["5 Forces","PESTEL","EFE","SG"], a:0},
+    {q: "تستخدم النماذج التالية لتحليل بيئة الصناعة ما عدا ...", opts:["5 Forces","PESTEL","EFE","SG"], a:3},
+    {q: "\"أن تكون أحد المنتجين والمزودين الرائدين في العالم للترفيه\" يعبر عن:", opts:["رسالة","رؤية","هدف","غاية"], a:1},
+    {q: "... توضح الغرض الأساسي للمؤسسة ودورها في الحاضر.", opts:["الأهداف","الرؤية","الرسالة","الغايات"], a:2},
+    {q: "يرتكز مدخل سلسلة القيمة لبورتر على ...", opts:["الأنشطة الأساسية","الأنشطة الداعمة","القيمة الاقتصادية المضافة","أ و ب"], a:3}
+];
+
+// ============ Render Quiz ============
+function renderTFQuiz() {
+    const container = document.getElementById('tfQuiz');
+    let html = '';
+    tfQuestions.forEach((q, i) => {
+        html += `<div class="quiz-question" id="tf-${i}">
+            <h4><span class="q-num">${i+1}</span><span>${q.q}</span></h4>
+            <div class="quiz-options">
+                <label class="quiz-option"><input type="radio" name="tf-${i}" value="true"><span class="radio-dot"></span> صح ✅</label>
+                <label class="quiz-option"><input type="radio" name="tf-${i}" value="false"><span class="radio-dot"></span> خطأ ❌</label>
+            </div>
+            <div class="quiz-feedback" id="tf-fb-${i}"></div>
+        </div>`;
+    });
+    container.innerHTML = html;
+}
+
+function renderMCQQuiz() {
+    const container = document.getElementById('mcqQuiz');
+    let html = '';
+    mcqQuestions.forEach((q, i) => {
+        html += `<div class="quiz-question" id="mcq-${i}">
+            <h4><span class="q-num">${i+22}</span><span>${q.q}</span></h4>
+            <div class="mcq-options">`;
+        q.opts.forEach((opt, j) => {
+            html += `<div class="mcq-option" onclick="selectMCQ(${i},${j},this)" data-idx="${j}">${String.fromCharCode(1571+j)}- ${opt}</div>`;
+        });
+        html += `</div><div class="quiz-feedback" id="mcq-fb-${i}"></div></div>`;
+    });
+    container.innerHTML = html;
+}
+
+function selectMCQ(qi, oi, el) {
+    const parent = document.getElementById(`mcq-${qi}`);
+    parent.querySelectorAll('.mcq-option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    parent.dataset.selected = oi;
+}
+
+function scoreTFQuiz() {
+    let correct = 0;
+    tfQuestions.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="tf-${i}"]:checked`);
+        const fb = document.getElementById(`tf-fb-${i}`);
+        const qEl = document.getElementById(`tf-${i}`);
+        if (!selected) return;
+        const isCorrect = (selected.value === 'true') === q.a;
+        qEl.classList.remove('correct','wrong');
+        fb.classList.remove('correct-fb','wrong-fb');
+        if (isCorrect) {
+            correct++;
+            qEl.classList.add('correct');
+            fb.className = 'quiz-feedback show correct-fb';
+            fb.innerHTML = '<i class="fas fa-check-circle"></i> إجابة صحيحة!';
+        } else {
+            qEl.classList.add('wrong');
+            fb.className = 'quiz-feedback show wrong-fb';
+            fb.innerHTML = '<i class="fas fa-times-circle"></i> إجابة خاطئة — الإجابة الصحيحة: ' + (q.a ? 'صح ✅' : 'خطأ ❌');
+        }
+    });
+    const scoreEl = document.getElementById('tfScore');
+    scoreEl.style.display = 'block';
+    document.getElementById('tfScoreNum').textContent = correct + '/' + tfQuestions.length;
+    document.getElementById('tfScoreText').textContent = `حصلت على ${correct} من ${tfQuestions.length} — ${Math.round(correct/tfQuestions.length*100)}%`;
+}
+
+function scoreMCQQuiz() {
+    let correct = 0;
+    mcqQuestions.forEach((q, i) => {
+        const qEl = document.getElementById(`mcq-${i}`);
+        const fb = document.getElementById(`mcq-fb-${i}`);
+        const selected = qEl.dataset.selected;
+        if (selected === undefined) return;
+        const isCorrect = parseInt(selected) === q.a;
+        qEl.querySelectorAll('.mcq-option').forEach(o => {
+            o.classList.remove('correct-answer','wrong-answer');
+            if (parseInt(o.dataset.idx) === q.a) o.classList.add('correct-answer');
+            else if (o.classList.contains('selected') && !isCorrect) o.classList.add('wrong-answer');
+        });
+        qEl.classList.remove('correct','wrong');
+        fb.classList.remove('correct-fb','wrong-fb');
+        if (isCorrect) {
+            correct++;
+            qEl.classList.add('correct');
+            fb.className = 'quiz-feedback show correct-fb';
+            fb.innerHTML = '<i class="fas fa-check-circle"></i> إجابة صحيحة!';
+        } else {
+            qEl.classList.add('wrong');
+            fb.className = 'quiz-feedback show wrong-fb';
+            fb.innerHTML = '<i class="fas fa-times-circle"></i> إجابة خاطئة!';
+        }
+    });
+    const scoreEl = document.getElementById('mcqScore');
+    scoreEl.style.display = 'block';
+    document.getElementById('mcqScoreNum').textContent = correct + '/' + mcqQuestions.length;
+    document.getElementById('mcqScoreText').textContent = `حصلت على ${correct} من ${mcqQuestions.length} — ${Math.round(correct/mcqQuestions.length*100)}%`;
+}
+
+// ============ Initialize Quizzes ============
+renderTFQuiz();
+renderMCQQuiz();
+
+// ============ Progress Bar ============
+window.addEventListener('scroll', () => {
+    const winHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (window.scrollY / winHeight) * 100;
+    document.getElementById('progress-bar').style.width = scrolled + '%';
+});
+
+// ============ Back to Top ============
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 400);
+});
+backToTop.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+// ============ Theme Toggle ============
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+});
+
+// ============ Mobile Menu ============
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+});
+document.querySelectorAll('.sidebar-nav a').forEach(a => {
+    a.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('show');
+    });
+});
+
+// ============ Active Sidebar Link ============
+const sections = document.querySelectorAll('.lesson-section');
+const navLinks = document.querySelectorAll('.sidebar-nav a');
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 200;
+        if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+    });
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+});
+
+// ============ Scroll Reveal ============
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, {threshold: 0.1});
+sections.forEach(s => observer.observe(s));
+
+// ============ Animated Counters ============
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = parseInt(counter.getAttribute('data-target'));
+            let count = 0;
+            const step = Math.ceil(target / 40);
+            const timer = setInterval(() => {
+                count += step;
+                if (count >= target) { count = target; clearInterval(timer); }
+                counter.textContent = count;
+            }, 40);
+            counterObserver.unobserve(counter);
+        }
+    });
+}, {threshold: 0.5});
+document.querySelectorAll('.stat-number').forEach(el => counterObserver.observe(el));
+
+// ============ Accordion ============
+document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+        header.parentElement.classList.toggle('open');
+    });
+});
+
+// ============ Search ============
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const searchableContent = [];
+document.querySelectorAll('.lesson-section').forEach(section => {
+    const title = section.querySelector('.lesson-header h2')?.textContent || '';
+    section.querySelectorAll('.glass-card, .accordion-body, .definition-block, .feature-card, .callout, td, li').forEach(el => {
+        const text = el.textContent.trim();
+        if (text.length > 10) {
+            searchableContent.push({text: text.substring(0, 200), section: section.id, title});
+        }
+    });
+});
+
+searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+    if (query.length < 2) { searchResults.classList.remove('show'); return; }
+    const results = searchableContent.filter(item => item.text.includes(query)).slice(0, 8);
+    if (results.length === 0) { searchResults.classList.remove('show'); return; }
+    searchResults.innerHTML = results.map(r => {
+        const idx = r.text.indexOf(query);
+        const start = Math.max(0, idx - 30);
+        const end = Math.min(r.text.length, idx + query.length + 30);
+        const snippet = (start > 0 ? '...' : '') + r.text.substring(start, end).replace(query, `<mark>${query}</mark>`) + (end < r.text.length ? '...' : '');
+        return `<div class="search-result-item" onclick="document.getElementById('${r.section}').scrollIntoView({behavior:'smooth'});searchResults.classList.remove('show');searchInput.value='';"><strong>${r.title}</strong><br>${snippet}</div>`;
+    }).join('');
+    searchResults.classList.add('show');
+});
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.search-box')) searchResults.classList.remove('show');
+});
+
+// ============ Particles ============
+(function createParticles() {
+    const container = document.getElementById('particles');
+    const colors = ['#7c3aed','#3b82f6','#06b6d4','#10b981','#f59e0b'];
+    for (let i = 0; i < 25; i++) {
+        const span = document.createElement('span');
+        span.style.left = Math.random() * 100 + '%';
+        span.style.width = span.style.height = (Math.random() * 4 + 2) + 'px';
+        span.style.background = colors[Math.floor(Math.random() * colors.length)];
+        span.style.animationDuration = (Math.random() * 15 + 10) + 's';
+        span.style.animationDelay = (Math.random() * 10) + 's';
+        container.appendChild(span);
+    }
+})();
+</script>
+</body>
+</html>
