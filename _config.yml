@@ -1,0 +1,7 @@
+# Static site — avoid Jekyll processing large media
+exclude:
+  - "*.md"
+  - transcripts/
+  - build_practice.py
+  - questions-source.txt
+  - "اسئلة.txt"

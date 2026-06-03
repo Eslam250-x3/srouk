@@ -1969,7 +1969,8 @@
         <div class="glass-card">
             <div class="card-title"><i class="fas fa-check-double"></i> أسئلة صح وخطأ</div>
             <div class="quiz-container" id="tfQuiz"></div>
-            <button class="score-btn" onclick="scoreTFQuiz()"><i class="fas fa-chart-pie"></i> عرض النتيجة</button>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px"><i class="fas fa-bolt"></i> التصحيح يظهر فور اختيارك لكل إجابة</p>
+            <button class="score-btn" onclick="scoreTFQuiz()"><i class="fas fa-chart-pie"></i> ملخص النتيجة</button>
             <div class="score-display" id="tfScore" style="display:none">
                 <div class="score-num" id="tfScoreNum">0</div>
                 <p id="tfScoreText" style="color:var(--text-secondary)"></p>
@@ -1980,7 +1981,8 @@
         <div class="glass-card" style="margin-top:32px">
             <div class="card-title"><i class="fas fa-list-check"></i> أسئلة اختيار من متعدد</div>
             <div class="quiz-container" id="mcqQuiz"></div>
-            <button class="score-btn" onclick="scoreMCQQuiz()"><i class="fas fa-chart-pie"></i> عرض النتيجة</button>
+            <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px"><i class="fas fa-bolt"></i> التصحيح يظهر فور اختيارك لكل إجابة</p>
+            <button class="score-btn" onclick="scoreMCQQuiz()"><i class="fas fa-chart-pie"></i> ملخص النتيجة</button>
             <div class="score-display" id="mcqScore" style="display:none">
                 <div class="score-num" id="mcqScoreNum">0</div>
                 <p id="mcqScoreText" style="color:var(--text-secondary)"></p>
@@ -2225,7 +2227,7 @@ function renderPracticeLesson(lessonId) {
                 <div class="quiz-feedback" id="ptf-fb-${lessonId}-${i}"></div>
             </div>`;
         });
-        html += `</div><button type="button" class="score-btn" onclick="scorePracticeTF(${lessonId})"><i class="fas fa-chart-pie"></i> تصحيح صح وخطأ</button>
+        html += `</div><p style="font-size:0.85rem;color:var(--text-muted);margin-top:8px"><i class="fas fa-bolt"></i> التصحيح يظهر فور اختيارك لكل إجابة</p><button type="button" class="score-btn" onclick="scorePracticeTF(${lessonId})"><i class="fas fa-chart-pie"></i> ملخص النتيجة — صح وخطأ</button>
             <div class="score-display" id="ptfScore-${lessonId}" style="display:none">
                 <div class="score-num" id="ptfScoreNum-${lessonId}">0</div>
                 <p id="ptfScoreText-${lessonId}" style="color:var(--text-secondary)"></p>
@@ -2243,7 +2245,7 @@ function renderPracticeLesson(lessonId) {
             });
             html += `</div><div class="quiz-feedback" id="pmcq-fb-${lessonId}-${i}"></div></div>`;
         });
-        html += `</div><button type="button" class="score-btn" onclick="scorePracticeMCQ(${lessonId})"><i class="fas fa-chart-pie"></i> تصحيح الاختيار</button>
+        html += `</div><p style="font-size:0.85rem;color:var(--text-muted);margin-top:8px"><i class="fas fa-bolt"></i> التصحيح يظهر فور اختيارك لكل إجابة</p><button type="button" class="score-btn" onclick="scorePracticeMCQ(${lessonId})"><i class="fas fa-chart-pie"></i> ملخص النتيجة — اختيار</button>
             <div class="score-display" id="pmcqScore-${lessonId}" style="display:none">
                 <div class="score-num" id="pmcqScoreNum-${lessonId}">0</div>
                 <p id="pmcqScoreText-${lessonId}" style="color:var(--text-secondary)"></p>
@@ -2251,14 +2253,38 @@ function renderPracticeLesson(lessonId) {
     }
 
     body.innerHTML = html;
+    bindPracticeQuizEvents(lessonId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function bindPracticeQuizEvents(lessonId) {
+    const lesson = PRACTICE_BANK.find(l => l.id === lessonId);
+    if (!lesson) return;
+    lesson.tf.forEach((q, i) => {
+        document.querySelectorAll(`input[name="ptf-${lessonId}-${i}"]`).forEach(inp => {
+            inp.addEventListener('change', () => gradePracticeTf(lessonId, i, q));
+        });
+    });
+}
+
+function gradePracticeTf(lessonId, i, q) {
+    const selected = document.querySelector(`input[name="ptf-${lessonId}-${i}"]:checked`);
+    const fb = document.getElementById(`ptf-fb-${lessonId}-${i}`);
+    const qEl = document.getElementById(`ptf-${lessonId}-${i}`);
+    if (!selected || !fb || !qEl) return;
+    applyTfFeedback(qEl, fb, (selected.value === 'true') === q.a, q.a);
 }
 
 function selectPracticeMCQ(lessonId, qi, oi, el) {
     const parent = document.getElementById(`pmcq-${lessonId}-${qi}`);
+    const lesson = PRACTICE_BANK.find(l => l.id === lessonId);
+    const q = lesson?.mcq[qi];
+    if (!parent || !q) return;
     parent.querySelectorAll('.mcq-option').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
     parent.dataset.selected = oi;
+    const fb = document.getElementById(`pmcq-fb-${lessonId}-${qi}`);
+    applyMcqFeedback(parent, fb, q, oi, oi === q.a);
 }
 
 function scorePracticeTF(lessonId) {
@@ -2271,18 +2297,8 @@ function scorePracticeTF(lessonId) {
         const qEl = document.getElementById(`ptf-${lessonId}-${i}`);
         if (!selected || !fb || !qEl) return;
         const isCorrect = (selected.value === 'true') === q.a;
-        qEl.classList.remove('correct', 'wrong');
-        fb.classList.remove('correct-fb', 'wrong-fb');
-        if (isCorrect) {
-            correct++;
-            qEl.classList.add('correct');
-            fb.className = 'quiz-feedback show correct-fb';
-            fb.innerHTML = '<i class="fas fa-check-circle"></i> إجابة صحيحة!';
-        } else {
-            qEl.classList.add('wrong');
-            fb.className = 'quiz-feedback show wrong-fb';
-            fb.innerHTML = '<i class="fas fa-times-circle"></i> إجابة خاطئة — الصحيح: ' + (q.a ? 'صح ✅' : 'خطأ ❌');
-        }
+        applyTfFeedback(qEl, fb, isCorrect, q.a);
+        if (isCorrect) correct++;
     });
     const scoreEl = document.getElementById(`ptfScore-${lessonId}`);
     if (scoreEl) {
@@ -2302,23 +2318,10 @@ function scorePracticeMCQ(lessonId) {
         const fb = document.getElementById(`pmcq-fb-${lessonId}-${i}`);
         const selected = qEl?.dataset.selected;
         if (selected === undefined || !fb) return;
-        const isCorrect = parseInt(selected, 10) === q.a;
-        qEl.querySelectorAll('.mcq-option').forEach(o => {
-            o.classList.remove('correct-answer', 'wrong-answer');
-            if (parseInt(o.dataset.idx, 10) === q.a) o.classList.add('correct-answer');
-            else if (o.classList.contains('selected') && !isCorrect) o.classList.add('wrong-answer');
-        });
-        qEl.classList.remove('correct', 'wrong');
-        if (isCorrect) {
-            correct++;
-            qEl.classList.add('correct');
-            fb.className = 'quiz-feedback show correct-fb';
-            fb.innerHTML = '<i class="fas fa-check-circle"></i> إجابة صحيحة!';
-        } else {
-            qEl.classList.add('wrong');
-            fb.className = 'quiz-feedback show wrong-fb';
-            fb.innerHTML = '<i class="fas fa-times-circle"></i> إجابة خاطئة!';
-        }
+        const sel = parseInt(selected, 10);
+        const isCorrect = sel === q.a;
+        applyMcqFeedback(qEl, fb, q, sel, isCorrect);
+        if (isCorrect) correct++;
     });
     const scoreEl = document.getElementById(`pmcqScore-${lessonId}`);
     if (scoreEl) {
@@ -2331,6 +2334,46 @@ function scorePracticeMCQ(lessonId) {
 
 if (typeof PRACTICE_BANK !== 'undefined') {
     buildTrainingLessonNav();
+}
+
+// ============ تصحيح فوري لكل سؤال ============
+function mcqOptionLetter(idx) {
+    return String.fromCharCode(1571 + idx);
+}
+
+function applyTfFeedback(qEl, fb, isCorrect, correctBool) {
+    if (!qEl || !fb) return;
+    qEl.classList.remove('correct', 'wrong');
+    if (isCorrect) {
+        qEl.classList.add('correct');
+        fb.className = 'quiz-feedback show correct-fb';
+        fb.innerHTML = '<i class="fas fa-check-circle"></i> إجابة صحيحة!';
+    } else {
+        qEl.classList.add('wrong');
+        fb.className = 'quiz-feedback show wrong-fb';
+        fb.innerHTML = '<i class="fas fa-times-circle"></i> إجابة خاطئة — الإجابة الصحيحة: ' + (correctBool ? 'صح ✅' : 'خطأ ❌');
+    }
+}
+
+function applyMcqFeedback(qEl, fb, q, selectedIdx, isCorrect) {
+    if (!qEl || !fb || !q) return;
+    qEl.querySelectorAll('.mcq-option').forEach(o => {
+        o.classList.remove('correct-answer', 'wrong-answer');
+        const idx = parseInt(o.dataset.idx, 10);
+        if (idx === q.a) o.classList.add('correct-answer');
+        else if (idx === selectedIdx && !isCorrect) o.classList.add('wrong-answer');
+    });
+    qEl.classList.remove('correct', 'wrong');
+    if (isCorrect) {
+        qEl.classList.add('correct');
+        fb.className = 'quiz-feedback show correct-fb';
+        fb.innerHTML = '<i class="fas fa-check-circle"></i> إجابة صحيحة!';
+    } else {
+        qEl.classList.add('wrong');
+        const correctLabel = mcqOptionLetter(q.a) + '- ' + q.opts[q.a];
+        fb.className = 'quiz-feedback show wrong-fb';
+        fb.innerHTML = '<i class="fas fa-times-circle"></i> إجابة خاطئة — الإجابة الصحيحة: <strong>' + correctLabel + '</strong>';
+    }
 }
 
 // ============ Quiz Data ============
@@ -2387,6 +2430,17 @@ function renderTFQuiz() {
         </div>`;
     });
     container.innerHTML = html;
+    tfQuestions.forEach((q, i) => {
+        document.querySelectorAll(`input[name="tf-${i}"]`).forEach(inp => {
+            inp.addEventListener('change', () => {
+                const selected = document.querySelector(`input[name="tf-${i}"]:checked`);
+                const fb = document.getElementById(`tf-fb-${i}`);
+                const qEl = document.getElementById(`tf-${i}`);
+                if (!selected) return;
+                applyTfFeedback(qEl, fb, (selected.value === 'true') === q.a, q.a);
+            });
+        });
+    });
 }
 
 function renderMCQQuiz() {
@@ -2406,9 +2460,13 @@ function renderMCQQuiz() {
 
 function selectMCQ(qi, oi, el) {
     const parent = document.getElementById(`mcq-${qi}`);
+    const q = mcqQuestions[qi];
+    if (!parent || !q) return;
     parent.querySelectorAll('.mcq-option').forEach(o => o.classList.remove('selected'));
     el.classList.add('selected');
     parent.dataset.selected = oi;
+    const fb = document.getElementById(`mcq-fb-${qi}`);
+    applyMcqFeedback(parent, fb, q, oi, oi === q.a);
 }
 
 function scoreTFQuiz() {
@@ -2419,18 +2477,8 @@ function scoreTFQuiz() {
         const qEl = document.getElementById(`tf-${i}`);
         if (!selected) return;
         const isCorrect = (selected.value === 'true') === q.a;
-        qEl.classList.remove('correct','wrong');
-        fb.classList.remove('correct-fb','wrong-fb');
-        if (isCorrect) {
-            correct++;
-            qEl.classList.add('correct');
-            fb.className = 'quiz-feedback show correct-fb';
-            fb.innerHTML = '<i class="fas fa-check-circle"></i> إجابة صحيحة!';
-        } else {
-            qEl.classList.add('wrong');
-            fb.className = 'quiz-feedback show wrong-fb';
-            fb.innerHTML = '<i class="fas fa-times-circle"></i> إجابة خاطئة — الإجابة الصحيحة: ' + (q.a ? 'صح ✅' : 'خطأ ❌');
-        }
+        applyTfFeedback(qEl, fb, isCorrect, q.a);
+        if (isCorrect) correct++;
     });
     const scoreEl = document.getElementById('tfScore');
     scoreEl.style.display = 'block';
@@ -2445,24 +2493,10 @@ function scoreMCQQuiz() {
         const fb = document.getElementById(`mcq-fb-${i}`);
         const selected = qEl.dataset.selected;
         if (selected === undefined) return;
-        const isCorrect = parseInt(selected) === q.a;
-        qEl.querySelectorAll('.mcq-option').forEach(o => {
-            o.classList.remove('correct-answer','wrong-answer');
-            if (parseInt(o.dataset.idx) === q.a) o.classList.add('correct-answer');
-            else if (o.classList.contains('selected') && !isCorrect) o.classList.add('wrong-answer');
-        });
-        qEl.classList.remove('correct','wrong');
-        fb.classList.remove('correct-fb','wrong-fb');
-        if (isCorrect) {
-            correct++;
-            qEl.classList.add('correct');
-            fb.className = 'quiz-feedback show correct-fb';
-            fb.innerHTML = '<i class="fas fa-check-circle"></i> إجابة صحيحة!';
-        } else {
-            qEl.classList.add('wrong');
-            fb.className = 'quiz-feedback show wrong-fb';
-            fb.innerHTML = '<i class="fas fa-times-circle"></i> إجابة خاطئة!';
-        }
+        const sel = parseInt(selected, 10);
+        const isCorrect = sel === q.a;
+        applyMcqFeedback(qEl, fb, q, sel, isCorrect);
+        if (isCorrect) correct++;
     });
     const scoreEl = document.getElementById('mcqScore');
     scoreEl.style.display = 'block';
